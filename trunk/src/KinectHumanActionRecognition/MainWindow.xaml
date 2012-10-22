@@ -1,0 +1,96 @@
+﻿<Window x:Class="Microsoft.Samples.Kinect.SkeletonBasics.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Kinect human action recognition" Height="735" Width="969" Loaded="WindowLoaded" Closing="WindowClosing">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="MediumGreyBrush" Color="#ff6e6e6e"/>
+        <SolidColorBrush x:Key="MediumRedBrush" Color="#F00"/>
+        <SolidColorBrush x:Key="KinectPurpleBrush" Color="#ff52318f"/>
+        <SolidColorBrush x:Key="KinectBlueBrush" Color="#ff00BCF2"/>
+        <Style TargetType="{x:Type Image}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+        <Style TargetType="{x:Type CheckBox}" x:Key="SquareCheckBox" >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" Background="Transparent">
+                                <Grid x:Name="SquareCheckBoxChecked">
+                                    <Image x:Name="CheckedNormal" Source="Images\CheckedNormal.png" Stretch="None" HorizontalAlignment="Center"/>
+                                    <Image x:Name="CheckedHover" Source="Images\CheckedHover.png" Stretch="None" HorizontalAlignment="Center" Visibility="Collapsed"/>
+                                </Grid>
+                                <Grid x:Name="SquareCheckBoxUnchecked" Visibility="Collapsed">
+                                    <Image x:Name="UncheckedNormal" Source="Images\UncheckedNormal.png" Stretch="None" HorizontalAlignment="Center"/>
+                                    <Image x:Name="UncheckedHover" Source="Images\UncheckedHover.png" Stretch="None" HorizontalAlignment="Center" Visibility="Collapsed"/>
+                                </Grid>
+                                <TextBlock x:Name="SquareCheckBoxText" Text="{TemplateBinding Content}" TextAlignment="Left"  VerticalAlignment="Center" Foreground="{StaticResource KinectPurpleBrush}" FontSize="15"  Margin="9,0,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="false">
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="SquareCheckBoxChecked"/>
+                                <Setter Property="Visibility" Value="Visible" TargetName="SquareCheckBoxUnchecked"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="CheckedNormal"/>
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="UncheckedNormal"/>
+                                <Setter Property="Visibility" Value="Visible" TargetName="CheckedHover"/>
+                                <Setter Property="Visibility" Value="Visible" TargetName="UncheckedHover"/>
+                                <Setter Property="Foreground" Value="{StaticResource KinectBlueBrush}" TargetName="SquareCheckBoxText"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Name="layoutGrid" Margin="10 0 10 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="511*"/>
+            <RowDefinition Height="92"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" Margin="0 0 0 20">
+            <Image DockPanel.Dock="Left" Source="Images\Logo.png" Stretch="None" Margin="0 10 0 5"/>
+            <TextBlock DockPanel.Dock="Right" Margin="0 0 -1 0" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="18">Action recognition</TextBlock>
+			<Image Grid.Column="1" Source="Images\Status.png" Stretch="None" HorizontalAlignment="Center" Margin="0 0 0 5"/>
+			<TextBlock Name="SimilarityDetectedLabel" FontFamily="Segoe UI" FontSize="18" Foreground="{StaticResource MediumRedBrush}" Height="21" Width="283" Visibility="Hidden">Similarity detected!</TextBlock>
+		</DockPanel>
+        <Viewbox Grid.Row="1" Stretch="Uniform" HorizontalAlignment="Center">
+            <Image Name="Image" Width="849" Height="480"/>
+        </Viewbox>
+        <CheckBox Grid.Row="2" Style="{StaticResource SquareCheckBox}" Content="Seated Mode" Height="Auto" VerticalAlignment="Center" Margin="-1,62,0,6" Name="checkBoxSeatedMode" Checked="CheckBoxSeatedModeChanged" Unchecked="CheckBoxSeatedModeChanged" HorizontalAlignment="Left" Width="121" />
+        <StatusBar Grid.Row="3" HorizontalAlignment="Stretch" Name="statusBar" VerticalAlignment="Bottom" Background="White" Foreground="{StaticResource MediumGreyBrush}">
+            <StatusBarItem Padding="0 0 0 10">
+                <TextBlock Name="statusBarText" Margin="-1 0 0 0">Click 'Seated' to change skeletal pipeline type!</TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+        <!--<Button Content="Evaluate angles" Grid.Row="2" Height="23" HorizontalAlignment="Right" Margin="0,69,571,0" Name="buttonEvaluateAngles" VerticalAlignment="Top" Width="100" Click="buttonEvaluateAngles_Click"/>-->
+        <GroupBox Grid.Row="2" Header="XML and recording" Height="100" HorizontalAlignment="Right" Margin="0,8,12,0" Name="groupBoxXMLAndRecording" VerticalAlignment="Top" Width="183" Grid.RowSpan="2">
+            <Grid Height="75">
+                <Button Content="Load Xml" Height="23" HorizontalAlignment="Right" Margin="0,10,90,0" Name="buttonLoadXml" VerticalAlignment="Top" Width="75" Click="buttonLoadXml_Click" />
+                <Button Content="Start" Height="23" HorizontalAlignment="Right" Margin="0,41,90,0" Name="buttonStartRecordingToXml" VerticalAlignment="Top" Width="75" Click="buttonStartRecordingToXml_Click" />
+                <Button Content="Stop" Height="23" HorizontalAlignment="Right" Margin="0,41,10,0" Name="buttonStopRecordingToXml" VerticalAlignment="Top" Width="75" Click="buttonStopRecordingToXml_Click" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="2" Header="Compare skeletons" Height="100" Margin="0,7,201,0" Name="groupBoxCompareSkeletons" VerticalAlignment="Top" HorizontalAlignment="Right" Width="129" Grid.RowSpan="2">
+            <Grid>
+                <Button Content="Start comparing" Height="23" HorizontalAlignment="Right" Margin="0,43,6,0" Name="buttonCompareSkeletons" VerticalAlignment="Top" Width="102" Click="buttonCompareSkeletons_Click" />
+                <Button Content="Select skeleton" Height="23" HorizontalAlignment="Right" Margin="0,12,6,0" Name="buttonSelectMainSkeleton" VerticalAlignment="Top" Width="102" Click="buttonSelectMainSkeleton_Click" />
+			</Grid>
+        </GroupBox>
+		<GroupBox Header="Compare actions" Height="100" HorizontalAlignment="Right" Margin="0,8,336,0" Name="groupBoxCompareActions" VerticalAlignment="Top" Width="342" Grid.Row="2" Grid.RowSpan="2">
+			<Grid>
+				<Button Content="Load first action" Height="23" Margin="0,11,6,0" Name="buttonLoadFirstAction" VerticalAlignment="Top" HorizontalAlignment="Right" Width="105" Click="buttonLoadFirstAction_Click"/>
+				<Button Content="Load second action" Height="23" Margin="0,42,6,0" Name="buttonLoadSecondAction" VerticalAlignment="Top" HorizontalAlignment="Right" Width="105" Click="buttonLoadSecondAction_Click" />
+				<Button Content="Compare" Height="23" HorizontalAlignment="Left" Margin="6,11,0,0" Name="buttonCompareActions" VerticalAlignment="Top" Width="96" Click="buttonCompareActions_Click"/>
+				<Button Content="Start recognizing" Height="23" HorizontalAlignment="Left" Margin="6,42,0,0" Name="buttonStartRecognizing" VerticalAlignment="Top" Width="96"  Click="buttonStartRecognizing_Click" />
+				<Button Content="Load action set" Height="54" HorizontalAlignment="Left" Margin="111,11,0,0" Name="buttonLoadActionSet" VerticalAlignment="Top" Width="102" Click="buttonLoadActionSet_Click"/>
+			</Grid>
+		</GroupBox>
+	</Grid>
+</Window>
