@@ -27,10 +27,10 @@ namespace Utility
 			double distanceZ = mainQuaternion.Z - secondaryQuaternion.Z;
 			double distanceW = mainQuaternion.W - secondaryQuaternion.W;
 
-			double similarity = Math.Pow((distanceX), 2) +
-				Math.Pow((distanceY), 2) +
-				Math.Pow((distanceZ), 2) +
-				Math.Pow((distanceW), 2);
+			double similarity = distanceX*distanceX +
+				distanceY * distanceY +
+				distanceZ * distanceZ +
+				distanceW * distanceW;
 
 			return similarity;
 		}
