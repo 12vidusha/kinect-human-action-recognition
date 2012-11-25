@@ -27,11 +27,12 @@ namespace Core
 		{
 			if (Frames.Count > windowFixedSize)
 			{
-				Frames.RemoveAt(0);
+				Frames.Dequeue();
+				//Console.WriteLine(Frames.Dequeue().HiararchicalQuaternions[JointType.KneeLeft].W);
 			}
 		}
 
-		public ActivityWindow(List<Skeleton> aFrames)
+		public ActivityWindow(Queue<ImportedSkeleton> aFrames)
 		{
 			Frames = aFrames;
 		}
@@ -39,17 +40,18 @@ namespace Core
 		public ActivityWindow(int maxSize)
 		{
 			windowFixedSize = maxSize;
-			Frames = new List<Skeleton>();
+			Frames = new Queue<ImportedSkeleton>();
+
 		}
 
 		public void Add(ImportedSkeleton skel, int maxSize)
 		{
 			windowFixedSize = maxSize;
-			Frames.Add(skel);
+			Frames.Enqueue(skel);
 			FixFramesLenght();
 		}
 
-		public List<Skeleton> Frames;
+		public Queue<ImportedSkeleton> Frames;
 
 		
 	}

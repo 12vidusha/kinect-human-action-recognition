@@ -48,6 +48,9 @@
     <Compile Include="ActivityWindow.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="DynamicTimeWarping.cs" />
+    <Compile Include="ElasticMatchingWithFreedomDegree.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Mode.cs" />
     <Compile Include="PoseRecognizedEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
