@@ -13,8 +13,8 @@ namespace Core
 	{
 		private const int SKELETON_COUNT = 6;
 		private const double ACCEPTABLE_SKELETON_SIMILARITY = 0.1;
-		private const int ACCEPTABLE_WINDOW_SIZE = 30;
-		private const double ACCEPTABLE_ACTION_SIMILARITY = 1000;
+		private const int ACCEPTABLE_WINDOW_SIZE = 40;
+		private const double ACCEPTABLE_ACTION_SIMILARITY = 3000;
 
 		private KinectSensor kinectSensor;
 
@@ -106,6 +106,7 @@ namespace Core
 							foreach (var activityRecord in activity.Recordings)
 							{
 								var activityRecordResult = DTW(activityRecord, window);
+								//var activityRecordResult = ElasticMatchingWithFreedomDegree.CompareActivities(activityRecord, window);
 								overallResult += activityRecordResult;
 							}
 
@@ -161,7 +162,7 @@ namespace Core
 					var jointManager = new JointAnglesManager(secondarySkeleton);
 					var secondarySkeletonWithAngles = jointManager.GetComputedAngles(secondarySkeleton);
 
-					var result = SkeletonComparer.Compare(mainSkeletonWithAngles, secondarySkeletonWithAngles, joints);
+					var result = SkeletonComparer.CompareWithSMIJ(mainSkeletonWithAngles, secondarySkeletonWithAngles, joints);
 
 					Console.WriteLine("Skeleton comparison: {0}", result);
 

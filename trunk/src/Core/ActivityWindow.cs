@@ -31,7 +31,7 @@ namespace Core
 			}
 		}
 
-		public ActivityWindow(List<ImportedSkeleton> aFrames)
+		public ActivityWindow(List<Skeleton> aFrames)
 		{
 			Frames = aFrames;
 		}
@@ -39,7 +39,7 @@ namespace Core
 		public ActivityWindow(int maxSize)
 		{
 			windowFixedSize = maxSize;
-			Frames = new List<ImportedSkeleton>();
+			Frames = new List<Skeleton>();
 		}
 
 		public void Add(ImportedSkeleton skel, int maxSize)
@@ -49,23 +49,8 @@ namespace Core
 			FixFramesLenght();
 		}
 
-		public List<ImportedSkeleton> Frames;
+		public List<Skeleton> Frames;
 
-		public bool IsMoving()
-		{
-			double result = 0.0;
-
-			JointAnglesEvaluator evaluator = new JointAnglesEvaluator(Frames);
-
-			var allJoints = MostInformativeJointsSelector.GetJoints(evaluator.evaluationData, windowFixedSize);
-
-			for(int i = 0; i < Frames.Count-1; i++){
-				result += SkeletonComparer.Compare(Frames[i], Frames[i + 1], allJoints);
-			}
-
-			Console.WriteLine(result);
-
-			return true;
-		}
+		
 	}
 }

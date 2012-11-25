@@ -7,65 +7,84 @@ using MatrixVector;
 
 namespace Utility
 {
-    public static class MostInformativeJointsSelector
-    {
-        public static List<JointType> GetJoints(Dictionary<JointType, MatrixVector.Vector3> aEvaluatedJoints, int aFrames)
-        {
-			List<KeyValuePair<double, JointType>> overallResult = new List<KeyValuePair<double, JointType>>();
+	public static class MostInformativeJointsSelector
+	{
 
-            foreach (var data in aEvaluatedJoints)
-            {
-                //Console.WriteLine(data.Key.ToString() + ": ");
-                //Console.WriteLine("\tX:" + data.Value.X);
-                //Console.WriteLine("\tY:" + data.Value.Y);
-                //Console.WriteLine("\tZ:" + data.Value.Z);
-                //Console.WriteLine("\tOverall: " + (data.Value.X + data.Value.Y + data.Value.Z));
+		public static List<JointType> GetJoints(List<ImportedSkeleton> aSkeletonCollection, int aFrames, QuaternionsStyles savingStyle)
+		{
+			Dictionary<JointType, double> overallResult = InitiazlizeDictionary();
 
-				overallResult.Add(new KeyValuePair<double, JointType>(((data.Value.X + data.Value.Y + data.Value.Z)) / aFrames, data.Key));
-            }
+			for (int i = 1; i < aSkeletonCollection.Count; i++)
+			{
+				var firstSkel = aSkeletonCollection[i - 1];
+				var secondSkel = aSkeletonCollection[i];
 
-            overallResult.Sort(ResultComparer);
+				foreach (var joint in Enum.GetNames(typeof(JointType)))
+				{
+					var jointType = (JointType)Enum.Parse(typeof(JointType), joint);
 
-            //TODO: Think of a way to get a few joints from the sorted Joints list
+					double jointEvaluation = 0;
 
-            var toReturn = new List<JointType>();
+					try
+					{
+						if (savingStyle == QuaternionsStyles.Absolute)
+						{
+							jointEvaluation = SkeletonComparer.CompareQuaternions(
+								firstSkel.AbsoluteQuaternions[jointType], secondSkel.AbsoluteQuaternions[jointType]);
+						}
+						else
+						{
+							jointEvaluation = SkeletonComparer.CompareQuaternions(
+								firstSkel.HiararchicalQuaternions[jointType], secondSkel.HiararchicalQuaternions[jointType]);
+						}
+					}
+					catch (Exception e) { }
 
-            /*
-            foreach (var joint in overallResult)
-            {
-                if (joint.Key / overallResult[overallResult.Count-1].Key > 10) //Relatively good working
-                {
-                    toReturn.Add(joint.Value); //JointType value
-					//Console.WriteLine("Joint " + joint.Value +" " + joint.Key);
-                }
-            }
-             */
+					overallResult[jointType] += jointEvaluation / aFrames;
+				}
+			}
 
-            var array = overallResult.ToArray();
-
-            for (int i = overallResult.Count-1; i >= overallResult.Count-7; --i)
-            {
-                toReturn.Add(array[i].Value);
-            }
-			
-            Console.WriteLine();
-
-            toReturn.Remove(JointType.WristLeft);
-            toReturn.Remove(JointType.WristRight);
-            try
-            {
-                toReturn.Remove(JointType.AnkleLeft);
-                toReturn.Remove(JointType.AnkleRight);
-            }
-            catch { }
-
-            return toReturn;
-        }
+			return SortAndPrepeareToReturn(overallResult.ToList());
+		}
 
 
-		static int ResultComparer(KeyValuePair<double, JointType> a, KeyValuePair<double, JointType> b)
-        {
-            return a.Key.CompareTo(b.Key);
-        }
-    }
+		private static Dictionary<JointType, double> InitiazlizeDictionary()
+		{
+			Dictionary<JointType, double> overallResult = new Dictionary<JointType, double>();
+			foreach (var joint in Enum.GetNames(typeof(JointType)))
+			{
+				overallResult.Add((JointType)Enum.Parse(typeof(JointType), joint), 0.0);
+			}
+			return overallResult;
+		}
+
+		private static List<JointType> SortAndPrepeareToReturn(List<KeyValuePair<JointType, double>> overallResultList)
+		{
+			overallResultList.Sort(ResultComparer);
+
+			var toReturn = new List<JointType>();
+			var array = overallResultList.ToArray();
+			for (int i = overallResultList.Count - 1; i >= overallResultList.Count - 7; --i)
+			{
+				if (array[i].Value != 0)
+				{
+					toReturn.Add(array[i].Key);
+				}
+			}
+
+			try
+			{
+				toReturn.Remove(JointType.WristLeft);
+				toReturn.Remove(JointType.WristRight);
+			}
+			catch { }
+
+			return toReturn;
+		}
+
+		static int ResultComparer(KeyValuePair<JointType, double> a, KeyValuePair<JointType, double> b)
+		{
+			return a.Value.CompareTo(b.Value);
+		}
+	}
 }

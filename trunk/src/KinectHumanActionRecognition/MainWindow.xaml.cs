@@ -105,7 +105,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
 		/// <summary>
 		/// Recorded skeleton
 		/// </summary>
-		private RecordSkeleton recordSkeleton = null;
+		private SkeletonRecordingManager recordSkeleton = null;
 
 		/// <summary>
 		/// The number of skeletons supported to be detected from the Kinect
@@ -353,11 +353,16 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
 		{
 			SimilarityDetectedLabel.Text = e.Activity.Name;
 			SimilarityDetectedLabel.Visibility = System.Windows.Visibility.Visible;
+
+			RecognitionConfidenceLabel.Text = e.Confidence.ToString();
+			RecognitionConfidenceLabel.Visibility = System.Windows.Visibility.Visible;
 		}
 
 		void recognitionCore_ActivityRecognizingEnded(object o, ActivityRecognizingEventArgs e)
 		{
 			SimilarityDetectedLabel.Visibility = System.Windows.Visibility.Hidden;
+
+			RecognitionConfidenceLabel.Visibility = System.Windows.Visibility.Hidden;
 		}
 
 		void recognitionCore_PoseReconized(object sender, PoseRecognizedEventArgs e)
@@ -476,7 +481,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
 
 			if (recordSkeleton == null)
 			{
-				recordSkeleton = new Utility.ImportExport.RecordSkeleton();
+				recordSkeleton = new Utility.ImportExport.SkeletonRecordingManager();
 			}
 		}
 
@@ -492,8 +497,8 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
 		/// <summary>
 		/// Handles the states of the recording engine. See RecordingStates.
 		/// </summary>
-		/// <param name="data">Skeleton to be saved</param>
-		void HandleRecordingState(ImportedSkeleton data)
+		/// <param name="skeletonToBeSaved">Skeleton to be saved</param>
+		void HandleRecordingState(Skeleton skeletonToBeSaved)
 		{
 			if (recordingState == RecordingStates.Stopping)
 			{
@@ -506,14 +511,13 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
 			}
 			if (recordingState == RecordingStates.Pending) return;
 
-			var jointManager = new JointAnglesManager(data);
-
-			var skeleton = jointManager.GetComputedAngles(data);
-			recordSkeleton.AnglesExportToXML(skeleton);
+			if (skeletonToBeSaved != null)
+			{
+				recordSkeleton.AddSkeletonToTheRecord(skeletonToBeSaved);
+			}
 		}
 
 		private List<ImportedSkeleton> mSkeletonCollection = new List<ImportedSkeleton>();
-
 		private void buttonLoadXml_Click(object sender, RoutedEventArgs e)
 		{
 			OpenFileDialog openXml = new OpenFileDialog();
@@ -548,8 +552,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
 			var skeleton = GetFirstSkeleton.Get(e, allSkeletons);
 			if (skeleton != null)
 			{
-				var skeletonWithAngles = new ImportedSkeleton(skeleton);
-				HandleRecordingState(skeletonWithAngles);
+				HandleRecordingState(skeleton);
 			}
 		}
 
@@ -592,12 +595,6 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
 			}
 		}
 
-		private void buttonCompareActions_Click(object sender, RoutedEventArgs e)
-		{
-			double result = recognitionCore.DTW(new ActivityRecord(mFirstAction), new ActivityWindow(mSecondAction));
-			Console.WriteLine(result);
-		}
-
 		private void buttonStartRecognizing_Click(object sender, RoutedEventArgs e)
 		{
 			if (mFirstAction != null)
@@ -607,8 +604,8 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
 
 				Activities.Add(firstActivity);
 			}
-			 
-			
+
+
 
 
 			recognitionCore.LoadTrainedData(Activities);
@@ -624,34 +621,28 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
 
 			List<Activity> tempActivities = new List<Activity>();
 
-			try
+
+			using (var streamReader = new StreamReader(openFile.FileName))
 			{
-				using (var streamReader = new StreamReader(openFile.FileName))
+				string line = "";
+
+				while ((line = streamReader.ReadLine()) != null)
 				{
-					string line = "";
+					ImportSkeleton action = new ImportSkeleton();
+					action.ImportAction(line);
+					List<ImportedSkeleton> skeleton = action.SkeletonCollection;
 
-					while ((line = streamReader.ReadLine()) != null)
-					{
-						ImportSkeleton action = new ImportSkeleton();
-						action.ImportAction(line);
-						List<ImportedSkeleton> skeleton = action.SkeletonCollection;
+					Activity currentActivity = new Activity(Path.GetFileNameWithoutExtension(line));
+					currentActivity.Recordings.Add(new ActivityRecord(action.SkeletonCollection));
 
-						Activity currentActivity = new Activity(Path.GetFileNameWithoutExtension(line));
-						currentActivity.Recordings.Add(new ActivityRecord(action.SkeletonCollection));
-
-						tempActivities.Add(currentActivity);
-					}
-
-					if (line != "")
-					{
-						Activities = tempActivities;
-
-					}
+					tempActivities.Add(currentActivity);
 				}
-			}
-			catch (Exception ex)
-			{
-				//throw ex;
+
+				if (line != "")
+				{
+					Activities = tempActivities;
+
+				}
 			}
 		}
 	}

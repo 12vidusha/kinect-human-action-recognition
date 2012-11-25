@@ -30,7 +30,7 @@ namespace Core
 			{
 				for (int j = 1; j < window.Frames.Count; j++)
 				{
-                    similarity = SkeletonComparer.Compare(record.Frames[i], window.Frames[j], record.MostInformativeJoints);
+                    similarity = SkeletonComparer.CompareWithSMIJ(record.Frames[i], window.Frames[j], record.MostInformativeJoints);
 
 					DTW[i, j] = similarity + 
 						

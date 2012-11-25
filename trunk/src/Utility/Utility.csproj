@@ -45,12 +45,12 @@
     <Compile Include="GetFirstSkeleton.cs" />
     <Compile Include="JointRotation.cs" />
     <Compile Include="Model\GetBodyJointsAngles.cs" />
-    <Compile Include="ImportExport\ExportSkeleton.cs" />
+    <Compile Include="ImportExport\SkeletonRecordingManager.cs" />
     <Compile Include="ImportExport\ImportSkeleton.cs" />
-    <Compile Include="JointAnglesEvaluator.cs" />
     <Compile Include="Model\JointAnglesManager.cs" />
     <Compile Include="MostInformativeJointsSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuaternionsStyles.cs" />
     <Compile Include="ReadingXmlState.cs" />
     <Compile Include="RecordingStates.cs" />
     <Compile Include="SkeletonComparer.cs" />

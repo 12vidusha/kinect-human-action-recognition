@@ -137,7 +137,7 @@ namespace Utility.ImportExport
 								float qx = 0;
 								if (float.TryParse(xmlReader.Value, out qx))
 								{
-									SkeletonCollection[currentSkeletonID].Quaterions[currentJointType].X = qx;
+									SkeletonCollection[currentSkeletonID].HiararchicalQuaternions[currentJointType].X = qx;
 								}
 								break;
 
@@ -146,7 +146,7 @@ namespace Utility.ImportExport
 								float qy = 0;
 								if (float.TryParse(xmlReader.Value, out qy))
 								{
-									SkeletonCollection[currentSkeletonID].Quaterions[currentJointType].Y = qy;
+									SkeletonCollection[currentSkeletonID].HiararchicalQuaternions[currentJointType].Y = qy;
 								}
 
 								break;
@@ -156,7 +156,7 @@ namespace Utility.ImportExport
 								float qz = 0;
 								if (float.TryParse(xmlReader.Value, out qz))
 								{
-									SkeletonCollection[currentSkeletonID].Quaterions[currentJointType].Z = qz;
+									SkeletonCollection[currentSkeletonID].HiararchicalQuaternions[currentJointType].Z = qz;
 								}
 
 								break;
@@ -166,7 +166,7 @@ namespace Utility.ImportExport
 								float qw = 0;
 								if (float.TryParse(xmlReader.Value, out qw))
 								{
-									SkeletonCollection[currentSkeletonID].Quaterions[currentJointType].W = qw;
+									SkeletonCollection[currentSkeletonID].HiararchicalQuaternions[currentJointType].W = qw;
 								}
 
 								break;
@@ -213,10 +213,10 @@ namespace Utility.ImportExport
 					Console.WriteLine("\tY: " + SkeletonCollection[i].Joints[type].Position.Y);
 					Console.WriteLine("\tZ: " + SkeletonCollection[i].Joints[type].Position.Z);
 					Console.WriteLine("Angles: ");
-					Console.WriteLine("\tX: " + SkeletonCollection[i].Quaterions[type].X);
-					Console.WriteLine("\tY: " + SkeletonCollection[i].Quaterions[type].Y);
-					Console.WriteLine("\tZ: " + SkeletonCollection[i].Quaterions[type].Z);
-					Console.WriteLine("\tW: " + SkeletonCollection[i].Quaterions[type].W);
+					Console.WriteLine("\tX: " + SkeletonCollection[i].HiararchicalQuaternions[type].X);
+					Console.WriteLine("\tY: " + SkeletonCollection[i].HiararchicalQuaternions[type].Y);
+					Console.WriteLine("\tZ: " + SkeletonCollection[i].HiararchicalQuaternions[type].Z);
+					Console.WriteLine("\tW: " + SkeletonCollection[i].HiararchicalQuaternions[type].W);
 					Console.WriteLine();
 				}
 			}
