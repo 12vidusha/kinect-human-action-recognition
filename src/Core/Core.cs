@@ -13,8 +13,8 @@ namespace Core
 	{
 		private const int SKELETON_COUNT = 6;
 		private const double ACCEPTABLE_SKELETON_SIMILARITY = 0.1;
-		private const int ACCEPTABLE_WINDOW_SIZE = 40;
-		private const double ACCEPTABLE_ACTION_SIMILARITY = 3000;
+		private const int ACCEPTABLE_WINDOW_SIZE = 30;
+		private const double ACCEPTABLE_ACTION_SIMILARITY = 1000;
 
 		private KinectSensor kinectSensor;
 
@@ -46,8 +46,6 @@ namespace Core
 		{
 			Activities = aActivities;
 		}
-
-		Vector4 shoulderLeft;
 
 		public int currentFrame = 0;
 
@@ -85,13 +83,15 @@ namespace Core
 
 				if (CurrentMode == Mode.FillingWindow)
 				{
-					JointAnglesManager jointManager = new JointAnglesManager(first);
-					mainSkeletonWithAngles = jointManager.GetComputedAngles(first);
-
-					window.Add(mainSkeletonWithAngles, ACCEPTABLE_WINDOW_SIZE);
+					window.Add(new ImportedSkeleton(first), ACCEPTABLE_WINDOW_SIZE);
 
 					if (window.Size >= ACCEPTABLE_WINDOW_SIZE)
 					{
+						foreach (var item in window.Frames.ToArray())
+						{
+							//Console.WriteLine(item.BoneOrientations[JointType.KneeLeft].HierarchicalRotation.Quaternion.X);
+						}
+
 						CurrentMode = Mode.AlgorithmRunning;
 					}
 				}
@@ -106,13 +106,12 @@ namespace Core
 							foreach (var activityRecord in activity.Recordings)
 							{
 								var activityRecordResult = DTW(activityRecord, window);
+
 								//var activityRecordResult = ElasticMatchingWithFreedomDegree.CompareActivities(activityRecord, window);
 								overallResult += activityRecordResult;
 							}
 
 							overallResult /= activity.Recordings.Count;
-
-							Console.WriteLine(overallResult);
 
 							if (overallResult <= ACCEPTABLE_ACTION_SIMILARITY && !activityRecognizingStartedTriggered)
 							{
@@ -127,7 +126,7 @@ namespace Core
 								activityRecognizingStartedTriggered = false;
 								ActivityRecognizingEnded.Invoke(this, new ActivityRecognizingEventArgs(activity, overallResult));
 							}
-
+							Console.WriteLine(overallResult);
 						}
 						Console.WriteLine();
 					}
@@ -171,33 +170,6 @@ namespace Core
 						PoseRecognizedEventArgs args = new PoseRecognizedEventArgs(result);
 						PoseReconized.Invoke(this, args);
 					}
-
-
-					//Vector4 shoulder = first.BoneOrientations[JointType.ElbowLeft].HierarchicalRotation.Quaternion;
-
-					//var s = first.BoneOrientations[JointType.ElbowLeft].StartJoint;
-					//var end = first.BoneOrientations[JointType.ElbowLeft].EndJoint;
-
-					//var c = shoulder.X * shoulderLeft.X +
-					//    shoulder.Y * shoulderLeft.Y +
-					//    shoulder.Z * shoulderLeft.Z +
-					//    shoulder.Z * shoulderLeft.Z;
-
-					//Console.WriteLine(c);
-
-					//Console.WriteLine(Math.Cos(c));
-
-					//Console.WriteLine(Math.Pow((Math.Cos(c) * 100), 2));
-
-					//Console.WriteLine(Math.Pow((c * 100), 2));
-
-					//Console.WriteLine(Math.Acos(c) * 2.0f);
-
-					//Console.WriteLine();
-
-					//Console.WriteLine();
-
-					//Console.WriteLine();
 				}
 			}
 		}

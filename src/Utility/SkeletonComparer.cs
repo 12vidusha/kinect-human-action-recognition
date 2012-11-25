@@ -69,69 +69,29 @@ namespace Utility
 						secondarySkeleton.BoneOrientations[joint].HierarchicalRotation.Quaternion);
 
 				overall += (similarity * 1000);// * jointWeight;
-				#region Projections method
-				//Vector3 mainVector = new Vector3(
-				//    mainSkeleton.AngledJoints[joint].XY,
-				//    mainSkeleton.AngledJoints[joint].XZ,
-				//    mainSkeleton.AngledJoints[joint].YZ);
-
-				//mainVector.Normalize();
-
-				//Vector3 secondaryVector = new Vector3(
-				//    secondarySkeleton.AngledJoints[joint].XY,
-				//    secondarySkeleton.AngledJoints[joint].XZ,
-				//    secondarySkeleton.AngledJoints[joint].YZ);
-
-				//secondaryVector.Normalize();
-
-				//var similarity = mainVector.DistanceToWithoutSquare(secondaryVector);
-
-				//if(!double.IsNaN(similarity)){
-				//    overall += similarity * jointWeight;
-				//}
-
-				#endregion
-
-				#region Rotating vectors by quaternions and measuring the distance between them
-				//var q = mainSkeleton.BoneOrientations[joint].HierarchicalRotation.Quaternion;
-				//var r = secondarySkeleton.BoneOrientations[joint].HierarchicalRotation.Quaternion;
-
-				//var first = new Vector3();
-				//first.x = 1; first.y = 0; first.z = 0; 
-				//var second = new Vector3();
-				//second.x = 1; second.y = 0; second.z = 0;
-
-				//first = RotateVectorByQuaternion(first, q);
-
-				//second = RotateVectorByQuaternion(second, r);
-
-				//overall += first.DistanceToWithoutSquare(second);
-				#endregion
 
 				jointID++;
 			}
 
-			#region Hip rotation calculation
+			return overall;
+		}
 
-			//Vector3 mainSkeletonDirection = new Vector3(
-			//    mainSkeleton.Joints[JointType.HipLeft].Position.X - mainSkeleton.Joints[JointType.HipCenter].Position.X,
-			//    mainSkeleton.Joints[JointType.HipLeft].Position.Y - mainSkeleton.Joints[JointType.HipCenter].Position.Y,
-			//    mainSkeleton.Joints[JointType.HipLeft].Position.Z - mainSkeleton.Joints[JointType.HipCenter].Position.Z);
+		public static double CompareWithSMIJ(ImportedSkeleton mainSkeleton, ImportedSkeleton secondarySkeleton, List<JointType> mostInformativeJoints)
+		{
+			double overall = 0;
 
-			//Vector3 secondarySkeletonDirection = new Vector3(
-			//    secondarySkeleton.Joints[JointType.HipLeft].Position.X - secondarySkeleton.Joints[JointType.HipCenter].Position.X,
-			//    secondarySkeleton.Joints[JointType.HipLeft].Position.Y - secondarySkeleton.Joints[JointType.HipCenter].Position.Y,
-			//    secondarySkeleton.Joints[JointType.HipLeft].Position.Z - secondarySkeleton.Joints[JointType.HipCenter].Position.Z);
+			int jointID = 0;
+			foreach (var joint in mostInformativeJoints)
+			{
+				var jointWeight = (mostInformativeJoints.Count - jointID) == 0 ? 1 : (mostInformativeJoints.Count - jointID);
 
-			//mainSkeletonDirection.Normalize();
-			//secondarySkeletonDirection.Normalize();
+				var similarity = CompareQuaternions(mainSkeleton.HiararchicalQuaternions[joint],
+						secondarySkeleton.HiararchicalQuaternions[joint]);
 
-			//var advance = mainSkeletonDirection.DistanceToWithoutSquare(secondarySkeletonDirection);
+				overall += (similarity * 1000);// * jointWeight;
 
-			//overall *= advance;
-
-			//Console.WriteLine(advance);
-			#endregion
+				jointID++;
+			}
 
 			return overall;
 		}
@@ -145,7 +105,8 @@ namespace Utility
 			double distanceZ = mainQuaternion.Z - secondaryQuaternion.Z;
 			double distanceW = mainQuaternion.W - secondaryQuaternion.W;
 
-			double similarity = distanceX * distanceX +
+			double similarity = 
+				distanceX * distanceX +
 				distanceY * distanceY +
 				distanceZ * distanceZ +
 				distanceW * distanceW;

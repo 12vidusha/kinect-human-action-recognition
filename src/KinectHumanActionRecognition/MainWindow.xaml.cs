@@ -605,9 +605,6 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
 				Activities.Add(firstActivity);
 			}
 
-
-
-
 			recognitionCore.LoadTrainedData(Activities);
 
 			recognitionCore.CurrentMode = Mode.FillingWindow;

@@ -26,11 +26,18 @@ namespace Core
 
 			DTW[0, 0] = 0;
 
+			var windowPresentedByImportedSkeletons = new List<ImportedSkeleton>();
+
+			foreach (var skeleton in window.Frames)
+			{
+				windowPresentedByImportedSkeletons.Add(new ImportedSkeleton(skeleton));
+			}
+
 			for (int i = 1; i < record.Frames.Count; i++)
 			{
 				for (int j = 1; j < window.Frames.Count; j++)
 				{
-                    similarity = SkeletonComparer.CompareWithSMIJ(record.Frames[i], window.Frames[j], record.MostInformativeJoints);
+					similarity = SkeletonComparer.CompareWithSMIJ(record.Frames[i], windowPresentedByImportedSkeletons[j], record.MostInformativeJoints);
 
 					DTW[i, j] = similarity + 
 						
