@@ -55,14 +55,15 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" Margin="0 0 0 20">
-            <Image DockPanel.Dock="Left" Source="Images\Logo.png" Stretch="None" Margin="0 10 0 5"/>
-            <TextBlock DockPanel.Dock="Right" Margin="0 0 -1 0" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="18">Action recognition</TextBlock>
 			<Image Grid.Column="1" Source="Images\Status.png" Stretch="None" HorizontalAlignment="Center" Margin="0 0 0 5"/>
+			<Image DockPanel.Dock="Left" Source="Images\Logo.png" Stretch="None" Margin="5 10 5 10"/>
+            <TextBlock DockPanel.Dock="Right" Margin="0 0 -1 0" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="18">Action recognition</TextBlock>
 			<TextBlock Name="SimilarityDetectedLabel" FontFamily="Segoe UI" FontSize="18" Foreground="{StaticResource MediumRedBrush}" Height="21" Width="283" Visibility="Hidden">Similarity detected!</TextBlock>
 		</DockPanel>
         <Viewbox Grid.Row="1" Stretch="Uniform" HorizontalAlignment="Center">
             <Image Name="Image" Width="849" Height="480"/>
         </Viewbox>
+		<TextBlock Grid.Row="2"  Name="RecognitionConfidenceLabel" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10, 0, 0, 6" Width="200" Visibility="Hidden">test</TextBlock>
         <CheckBox Grid.Row="2" Style="{StaticResource SquareCheckBox}" Content="Seated Mode" Height="Auto" VerticalAlignment="Center" Margin="-1,62,0,6" Name="checkBoxSeatedMode" Checked="CheckBoxSeatedModeChanged" Unchecked="CheckBoxSeatedModeChanged" HorizontalAlignment="Left" Width="121" />
         <StatusBar Grid.Row="3" HorizontalAlignment="Stretch" Name="statusBar" VerticalAlignment="Bottom" Background="White" Foreground="{StaticResource MediumGreyBrush}">
             <StatusBarItem Padding="0 0 0 10">
@@ -87,7 +88,6 @@
 			<Grid>
 				<Button Content="Load first action" Height="23" Margin="0,11,6,0" Name="buttonLoadFirstAction" VerticalAlignment="Top" HorizontalAlignment="Right" Width="105" Click="buttonLoadFirstAction_Click"/>
 				<Button Content="Load second action" Height="23" Margin="0,42,6,0" Name="buttonLoadSecondAction" VerticalAlignment="Top" HorizontalAlignment="Right" Width="105" Click="buttonLoadSecondAction_Click" />
-				<Button Content="Compare" Height="23" HorizontalAlignment="Left" Margin="6,11,0,0" Name="buttonCompareActions" VerticalAlignment="Top" Width="96" Click="buttonCompareActions_Click"/>
 				<Button Content="Start recognizing" Height="23" HorizontalAlignment="Left" Margin="6,42,0,0" Name="buttonStartRecognizing" VerticalAlignment="Top" Width="96"  Click="buttonStartRecognizing_Click" />
 				<Button Content="Load action set" Height="54" HorizontalAlignment="Left" Margin="111,11,0,0" Name="buttonLoadActionSet" VerticalAlignment="Top" Width="102" Click="buttonLoadActionSet_Click"/>
 			</Grid>

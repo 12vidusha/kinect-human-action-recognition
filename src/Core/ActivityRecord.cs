@@ -16,8 +16,7 @@ namespace Core
 		public ActivityRecord(List<ImportedSkeleton> aFrames)
 		{
 			Frames = aFrames;
-			JointAnglesEvaluator evaluator = new JointAnglesEvaluator(Frames);
-			MostInformativeJoints = MostInformativeJointsSelector.GetJoints(evaluator.evaluationData, Frames.Count);
+			MostInformativeJoints = MostInformativeJointsSelector.GetJoints(Frames, Frames.Count, QuaternionsStyles.Hierarchical);
 		}
 
 		public List<ImportedSkeleton> Frames;

@@ -7,8 +7,8 @@ using MatrixVector;
 
 namespace Utility
 {
-    public static class SkeletonComparer
-    {
+	public static class SkeletonComparer
+	{
 		public static Vector3 RotateVectorByQuaternion(Vector3 vec, Vector4 q)
 		{
 			vec.Normalize();
@@ -56,7 +56,7 @@ namespace Utility
 			return res;
 		}
 
-		public static double Compare(ImportedSkeleton mainSkeleton, ImportedSkeleton secondarySkeleton, List<JointType> mostInformativeJoints)
+		public static double CompareWithSMIJ(ImportedSkeleton mainSkeleton, Skeleton secondarySkeleton, List<JointType> mostInformativeJoints)
 		{
 			double overall = 0;
 
@@ -65,38 +65,10 @@ namespace Utility
 			{
 				var jointWeight = (mostInformativeJoints.Count - jointID) == 0 ? 1 : (mostInformativeJoints.Count - jointID);
 
-				#region Comparing quaternions
-
-				//(x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2 + (w1 - w2)^2
-
-				Vector4 mainQuaternion = new Vector4();
-				mainQuaternion.X = mainSkeleton.Quaterions[joint].X;
-				mainQuaternion.Y = mainSkeleton.Quaterions[joint].Y;
-				mainQuaternion.Z = mainSkeleton.Quaterions[joint].Z;
-				mainQuaternion.W = mainSkeleton.Quaterions[joint].W;
-
-				// = mainSkeleton.BoneOrientations[joint].HierarchicalRotation.Quaternion;
-				Vector4 secondaryQuaternion = new Vector4();
-				secondaryQuaternion.X = secondarySkeleton.Quaterions[joint].X;
-				secondaryQuaternion.Y = secondarySkeleton.Quaterions[joint].Y;
-				secondaryQuaternion.Z = secondarySkeleton.Quaterions[joint].Z;
-				secondaryQuaternion.W = secondarySkeleton.Quaterions[joint].W;
-
-				double distanceX = mainQuaternion.X - secondaryQuaternion.X;
-				double distanceY = mainQuaternion.Y - secondaryQuaternion.Y;
-				double distanceZ = mainQuaternion.Z - secondaryQuaternion.Z;
-				double distanceW = mainQuaternion.W - secondaryQuaternion.W;
-
-				double similarity = Math.Pow((distanceX), 2) +
-					Math.Pow((distanceY), 2) +
-					Math.Pow((distanceZ), 2) +
-					Math.Pow((distanceW), 2);
+				var similarity = CompareQuaternions(mainSkeleton.HiararchicalQuaternions[joint], 
+						secondarySkeleton.BoneOrientations[joint].HierarchicalRotation.Quaternion);
 
 				overall += (similarity * 1000);// * jointWeight;
-
-
-				#endregion
-
 				#region Projections method
 				//Vector3 mainVector = new Vector3(
 				//    mainSkeleton.AngledJoints[joint].XY,
@@ -163,5 +135,38 @@ namespace Utility
 
 			return overall;
 		}
-    }
+
+		public static double CompareQuaternions(JointRotation mainQuaternion, JointRotation secondaryQuaternion)
+		{
+			//(x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2 + (w1 - w2)^2
+
+			double distanceX = mainQuaternion.X - secondaryQuaternion.X;
+			double distanceY = mainQuaternion.Y - secondaryQuaternion.Y;
+			double distanceZ = mainQuaternion.Z - secondaryQuaternion.Z;
+			double distanceW = mainQuaternion.W - secondaryQuaternion.W;
+
+			double similarity = distanceX * distanceX +
+				distanceY * distanceY +
+				distanceZ * distanceZ +
+				distanceW * distanceW;
+
+			return similarity;
+		}
+
+		public static double CompareQuaternions(JointRotation mainQuaternion, Vector4 secondaryQuaternion)
+		{
+			JointRotation newSecondaryQuaternion = new JointRotation(secondaryQuaternion.X, secondaryQuaternion.Y, secondaryQuaternion.Z, secondaryQuaternion.W);
+
+			return CompareQuaternions(mainQuaternion, newSecondaryQuaternion);
+		}
+
+		public static double CompareQuaternions(Vector4 mainQuaternion, Vector4 secondaryQuaternion)
+		{
+			JointRotation newMainQuaternion = new JointRotation(mainQuaternion.X, mainQuaternion.Y, mainQuaternion.Z, mainQuaternion.W);
+			JointRotation newSecondaryQuaternion = new JointRotation(secondaryQuaternion.X, secondaryQuaternion.Y, secondaryQuaternion.Z, secondaryQuaternion.W);
+			
+
+			return CompareQuaternions(newMainQuaternion, newSecondaryQuaternion);
+		}
+	}
 }

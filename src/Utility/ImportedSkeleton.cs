@@ -10,26 +10,27 @@ namespace Utility
 	{
 		public ImportedSkeleton(Skeleton skeleton) : base() {
 
-			foreach (var key in Enum.GetNames(typeof(JointType)))
-			{
-				var joint = (JointType)Enum.Parse(typeof(JointType), key);
-				Quaterions.Add(joint, new JointRotation());
-			}
-
+			InitializeDictionaries();
 			CopyDataFromSkeleton(skeleton);
 		}
 
 		public ImportedSkeleton()
 			: base()
 		{
-			foreach (var key in Enum.GetNames(typeof(JointType)))
-			{
-				var joint = (JointType)Enum.Parse(typeof(JointType), key);
-				Quaterions.Add(joint, new JointRotation());
-			}
+			InitializeDictionaries();
 
 			var skeleton = new Skeleton();
 			CopyDataFromSkeleton(skeleton);
+		}
+
+		private void InitializeDictionaries()
+		{
+			foreach (var key in Enum.GetNames(typeof(JointType)))
+			{
+				var joint = (JointType)Enum.Parse(typeof(JointType), key);
+				HiararchicalQuaternions.Add(joint, new JointRotation());
+				AbsoluteQuaternions.Add(joint, new JointRotation());
+			}
 		}
 
 		private void CopyDataFromSkeleton(Skeleton skeleton)
@@ -41,10 +42,15 @@ namespace Utility
 				var joint = (JointType)Enum.Parse(typeof(JointType), key);
 				this.Joints[joint]  = skeleton.Joints[joint];
 
-				this.Quaterions[joint].X = BoneOrientations[joint].HierarchicalRotation.Quaternion.X;
-				this.Quaterions[joint].Y = BoneOrientations[joint].HierarchicalRotation.Quaternion.Y;
-				this.Quaterions[joint].Z = BoneOrientations[joint].HierarchicalRotation.Quaternion.Z;
-				this.Quaterions[joint].W = BoneOrientations[joint].HierarchicalRotation.Quaternion.W;
+				this.HiararchicalQuaternions[joint].X = skeleton.BoneOrientations[joint].HierarchicalRotation.Quaternion.X;
+				this.HiararchicalQuaternions[joint].Y = skeleton.BoneOrientations[joint].HierarchicalRotation.Quaternion.Y;
+				this.HiararchicalQuaternions[joint].Z = skeleton.BoneOrientations[joint].HierarchicalRotation.Quaternion.Z;
+				this.HiararchicalQuaternions[joint].W = skeleton.BoneOrientations[joint].HierarchicalRotation.Quaternion.W;
+
+				this.AbsoluteQuaternions[joint].X = skeleton.BoneOrientations[joint].AbsoluteRotation.Quaternion.X;
+				this.AbsoluteQuaternions[joint].Y = skeleton.BoneOrientations[joint].AbsoluteRotation.Quaternion.Y;
+				this.AbsoluteQuaternions[joint].Z = skeleton.BoneOrientations[joint].AbsoluteRotation.Quaternion.Z;
+				this.AbsoluteQuaternions[joint].W = skeleton.BoneOrientations[joint].AbsoluteRotation.Quaternion.W;
 			}
 
 			this.ClippedEdges = skeleton.ClippedEdges;
@@ -53,6 +59,7 @@ namespace Utility
 			this.TrackingState = skeleton.TrackingState;
 		}
 
-		public Dictionary<JointType, JointRotation> Quaterions = new Dictionary<JointType,JointRotation>();
+		public Dictionary<JointType, JointRotation> HiararchicalQuaternions = new Dictionary<JointType, JointRotation>();
+		public Dictionary<JointType, JointRotation> AbsoluteQuaternions = new Dictionary<JointType, JointRotation>();
 	}
 }

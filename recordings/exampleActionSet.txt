@@ -1,3 +1,0 @@
-C:\Users\Lyubo\Projects\KinectHumanActionRecognition\recordings\squat.xml
-C:\Users\Lyubo\Projects\KinectHumanActionRecognition\recordings\wavingLeftHand.xml
-C:\Users\Lyubo\Projects\KinectHumanActionRecognition\recordings\wavingRightHand.xml

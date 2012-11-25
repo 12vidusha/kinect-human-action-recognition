@@ -41,15 +41,15 @@ namespace Utility.Model
 
 			//    if (!double.IsNaN(anglesInDouble[0]))
 			//    {
-			//        skeleton.Quaterions[key].XY = (float)anglesInDouble[0];
+			//        skeleton.HiararchicalQuaternions[key].XY = (float)anglesInDouble[0];
 			//    }
 			//    if (!double.IsNaN(anglesInDouble[1]))
 			//    {
-			//        skeleton.Quaterions[key].XZ = (float)anglesInDouble[1];
+			//        skeleton.HiararchicalQuaternions[key].XZ = (float)anglesInDouble[1];
 			//    }
 			//    if (!double.IsNaN(anglesInDouble[2]))
 			//    {
-			//        skeleton.Quaterions[key].YZ = (float)anglesInDouble[2];
+			//        skeleton.HiararchicalQuaternions[key].YZ = (float)anglesInDouble[2];
 			//    }
 			//}
 			#endregion
