@@ -10,7 +10,8 @@ namespace Core
 {
 	public static class DynamicTimeWarping
 	{
-		public static double CompareActivities(ActivityRecord record, ActivityWindow window){
+		public static double CompareActivities(ActivityRecord record, ActivityWindow window)
+		{
 			double similarity = 0.0f;
 			double[,] DTW = new double[record.Frames.Count, window.Frames.Count];
 
@@ -39,18 +40,18 @@ namespace Core
 				{
 					similarity = SkeletonComparer.CompareWithSMIJ(record.Frames[i], windowPresentedByImportedSkeletons[j], record.MostInformativeJoints);
 
-					DTW[i, j] = similarity + 
-						
+					DTW[i, j] = similarity +
 						Math.Min(
 							Math.Min(
-								DTW[i - 1, j], DTW[i, j - 1]
-							), 
+							DTW[i - 1, j], 
+							DTW[i, j - 1]),
 							DTW[i - 1, j - 1]
 						);
+
 				}
 			}
 
-			return DTW[record.Frames.Count-1, window.Frames.Count-1]/record.MostInformativeJoints.Count;
+			return DTW[record.Frames.Count - 1, window.Frames.Count - 1] / record.MostInformativeJoints.Count;
 		}
 	}
 }
