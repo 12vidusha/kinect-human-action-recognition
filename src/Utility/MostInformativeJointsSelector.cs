@@ -74,6 +74,8 @@ namespace Utility
 
 			try
 			{
+				toReturn.Remove(JointType.FootLeft);
+				toReturn.Remove(JointType.FootRight);
 				toReturn.Remove(JointType.WristLeft);
 				toReturn.Remove(JointType.WristRight);
 			}

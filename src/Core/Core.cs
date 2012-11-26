@@ -13,8 +13,8 @@ namespace Core
 	{
 		private const int SKELETON_COUNT = 6;
 		private const double ACCEPTABLE_SKELETON_SIMILARITY = 0.1;
-		private const int ACCEPTABLE_WINDOW_SIZE = 30;
-		private const double ACCEPTABLE_ACTION_SIMILARITY = 1000;
+		private const int ACCEPTABLE_WINDOW_SIZE = 40;
+		private const double ACCEPTABLE_ACTION_SIMILARITY = 1500;
 
 		private KinectSensor kinectSensor;
 

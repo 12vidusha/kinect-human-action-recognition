@@ -1,3 +1,0 @@
-E:\Projects\KinectHumanActionRecognition\recordings\squatFiltered.xml
-E:\Projects\KinectHumanActionRecognition\recordings\wavingLeftHandFiltered.xml
-E:\Projects\KinectHumanActionRecognition\recordings\wavingRightHandFiltered.xml
