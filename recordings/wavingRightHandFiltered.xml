@@ -3,176 +3,132 @@
 <frame>0</frame>
 <HandRight><angles><Qx>0.05927247</Qx><Qy>-0.01276483</Qy><Qz>-0.2101441</Qz><Qw>0.9757885</Qw></angles><positions><x>0.2607924</x><y>0.5330979</y><z>2.876231</z></positions></HandRight>
 <ElbowRight><angles><Qx>-0.009211031</Qx><Qy>0.4270767</Qy><Qz>0.1374507</Qz><Qw>0.8936598</Qw></angles><positions><x>0.07057312</x><y>0.2824923</y><z>3.050935</z></positions></ElbowRight>
-<HandLeft><angles><Qx>0.04403628</Qx><Qy>-0.005474815</Qy><Qz>-0.1232538</Qz><Qw>0.9913825</Qw></angles><positions><x>-0.5583177</x><y>-0.08538873</y><z>2.951825</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>0.003024952</Qx><Qy>0.01847617</Qy><Qz>-0.3201794</Qz><Qw>0.9471719</Qw></angles><positions><x>-0.513999</x><y>0.2200887</y><z>3.072805</z></positions></ElbowLeft>
 </skeleton>
 
 <skeleton>
 <frame>1</frame>
 <HandRight><angles><Qx>0.1438674</Qx><Qy>-0.02955547</Qy><Qz>-0.1990508</Qz><Qw>0.9689208</Qw></angles><positions><x>0.2764791</x><y>0.5225096</y><z>2.891754</z></positions></HandRight>
 <ElbowRight><angles><Qx>-0.0230173</Qx><Qy>0.4727019</Qy><Qz>0.1363482</Qz><Qw>0.8703058</Qw></angles><positions><x>0.07042395</x><y>0.2798693</y><z>3.051075</z></positions></ElbowRight>
-<HandLeft><angles><Qx>0.01780187</Qx><Qy>-0.002182038</Qy><Qz>-0.1216436</Qz><Qw>0.9924118</Qw></angles><positions><x>-0.561071</x><y>-0.08490184</y><z>2.960775</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>0.004898611</Qx><Qy>0.01784322</Qy><Qz>-0.3220673</Qz><Qw>0.9465359</Qw></angles><positions><x>-0.5138176</x><y>0.2207815</y><z>3.0745</z></positions></ElbowLeft>
 </skeleton>
 
 <skeleton>
 <frame>2</frame>
 <HandRight><angles><Qx>0.1095074</Qx><Qy>-0.02406528</Qy><Qz>-0.2132842</Qz><Qw>0.9705354</Qw></angles><positions><x>0.2763331</x><y>0.5224297</y><z>2.893784</z></positions></HandRight>
 <ElbowRight><angles><Qx>-0.02475639</Qx><Qy>0.4738475</Qy><Qz>0.1379995</Qz><Qw>0.8693743</Qw></angles><positions><x>0.06870345</x><y>0.2797125</y><z>3.051099</z></positions></ElbowRight>
-<HandLeft><angles><Qx>0.0246241</Qx><Qy>-0.002816745</Qy><Qz>-0.1136138</Qz><Qw>0.9932157</Qw></angles><positions><x>-0.5627015</x><y>-0.08710964</y><z>2.965515</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>0.006765655</Qx><Qy>0.01752896</Qy><Qz>-0.3248151</Qz><Qw>0.9455909</Qw></angles><positions><x>-0.514151</x><y>0.2188024</y><z>3.075306</z></positions></ElbowLeft>
 </skeleton>
 
 <skeleton>
 <frame>3</frame>
 <HandRight><angles><Qx>-0.01703553</Qx><Qy>0.004210819</Qy><Qz>-0.2399195</Qz><Qw>0.9706342</Qw></angles><positions><x>0.2663337</x><y>0.5340883</y><z>2.898005</z></positions></HandRight>
 <ElbowRight><angles><Qx>-0.02084663</Qx><Qy>0.4523295</Qy><Qz>0.1416322</Qz><Qw>0.8802862</Qw></angles><positions><x>0.06751636</x><y>0.2804311</y><z>3.050158</z></positions></ElbowRight>
-<HandLeft><angles><Qx>0.0408117</Qx><Qy>-0.005081409</Qy><Qz>-0.1234501</Qz><Qw>0.9914982</Qw></angles><positions><x>-0.563083</x><y>-0.08717959</y><z>2.965925</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>0.00692212</Qx><Qy>0.01801601</Qy><Qz>-0.326098</Qz><Qw>0.9451391</Qw></angles><positions><x>-0.5140681</x><y>0.2186268</y><z>3.07624</z></positions></ElbowLeft>
 </skeleton>
 
 <skeleton>
 <frame>4</frame>
 <HandRight><angles><Qx>-0.1638363</Qx><Qy>0.06904088</Qy><Qz>-0.3821436</Qz><Qw>0.9068392</Qw></angles><positions><x>0.2469048</x><y>0.5334613</y><z>2.904807</z></positions></HandRight>
 <ElbowRight><angles><Qx>-0.0419689</Qx><Qy>0.4399009</Qy><Qz>0.184115</Qz><Qw>0.8779678</Qw></angles><positions><x>0.04080041</x><y>0.2775186</y><z>3.051732</z></positions></ElbowRight>
-<HandLeft><angles><Qx>0.03850877</Qx><Qy>-0.004735516</Qy><Qz>-0.1219611</Qz><Qw>0.9917762</Qw></angles><positions><x>-0.5640321</x><y>-0.08669086</y><z>2.966606</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>0.006598473</Qx><Qy>0.01896008</Qy><Qz>-0.3262834</Qz><Qw>0.9450588</Qw></angles><positions><x>-0.5138972</x><y>0.2190411</y><z>3.077425</z></positions></ElbowLeft>
 </skeleton>
 
 <skeleton>
 <frame>5</frame>
 <HandRight><angles><Qx>0.0905365</Qx><Qy>-0.0171021</Qy><Qz>-0.1848252</Qz><Qw>0.9784428</Qw></angles><positions><x>0.1015667</x><y>0.589715</y><z>2.852193</z></positions></HandRight>
 <ElbowRight><angles><Qx>0.07538802</Qx><Qy>0.3436327</Qy><Qz>0.1365445</Qz><Qw>0.9260609</Qw></angles><positions><x>0.06353566</x><y>0.3092788</y><z>3.023229</z></positions></ElbowRight>
-<HandLeft><angles><Qx>-0.03173235</Qx><Qy>0.004215056</Qy><Qz>-0.1316075</Qz><Qw>0.990785</Qw></angles><positions><x>-0.564391</x><y>-0.0889947</y><z>2.982226</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>0.005444031</Qx><Qy>0.01974583</Qy><Qz>-0.3235353</Qz><Qw>0.9459945</Qw></angles><positions><x>-0.5134699</x><y>0.2186285</y><z>3.076852</z></positions></ElbowLeft>
 </skeleton>
 
 <skeleton>
 <frame>6</frame>
 <HandRight><angles><Qx>0.08064381</Qx><Qy>-0.0130155</Qy><Qz>-0.1588007</Qz><Qw>0.9839256</Qw></angles><positions><x>0.0498388</x><y>0.5977597</y><z>2.847075</z></positions></HandRight>
 <ElbowRight><angles><Qx>0.0922088</Qx><Qy>0.2891207</Qy><Qz>0.1439913</Qz><Qw>0.9418988</Qw></angles><positions><x>0.06289686</x><y>0.3072264</y><z>3.024761</z></positions></ElbowRight>
-<HandLeft><angles><Qx>0.01428545</Qx><Qy>-0.001839839</Qy><Qz>-0.1277228</Qz><Qw>0.9917053</Qw></angles><positions><x>-0.5641286</x><y>-0.09036738</y><z>2.972603</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>0.003526772</Qx><Qy>0.02343253</Qy><Qz>-0.3245027</Qz><Qw>0.9455879</Qw></angles><positions><x>-0.5133311</x><y>0.2184864</y><z>3.076804</z></positions></ElbowLeft>
 </skeleton>
 
 <skeleton>
 <frame>7</frame>
 <HandRight><angles><Qx>0.06958488</Qx><Qy>-0.01364655</Qy><Qz>-0.1919634</Qz><Qw>0.978837</Qw></angles><positions><x>-0.0004607113</x><y>0.5841833</y><z>2.837666</z></positions></HandRight>
 <ElbowRight><angles><Qx>0.0983752</Qx><Qy>0.1971891</Qy><Qz>0.1484916</Qz><Qw>0.9640483</Qw></angles><positions><x>0.05878948</x><y>0.3045368</y><z>3.026344</z></positions></ElbowRight>
-<HandLeft><angles><Qx>0.01147501</Qx><Qy>-0.001487047</Qy><Qz>-0.128507</Qz><Qw>0.991641</Qw></angles><positions><x>-0.5636923</x><y>-0.09061876</y><z>2.972985</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>0.002656393</Qx><Qy>0.02379601</Qy><Qz>-0.3226221</Qz><Qw>0.946225</Qw></angles><positions><x>-0.513322</x><y>0.2185698</y><z>3.076935</z></positions></ElbowLeft>
 </skeleton>
 
 <skeleton>
 <frame>8</frame>
 <HandRight><angles><Qx>0.09778947</Qx><Qy>-0.007069116</Qy><Qz>-0.07175372</Qz><Qw>0.992592</Qw></angles><positions><x>-0.01986444</x><y>0.5792681</y><z>2.830698</z></positions></HandRight>
 <ElbowRight><angles><Qx>0.09785457</Qx><Qy>0.193193</Qy><Qz>0.1531071</Qz><Qw>0.9641884</Qw></angles><positions><x>0.05484112</x><y>0.3042573</y><z>3.024326</z></positions></ElbowRight>
-<HandLeft><angles><Qx>0.02023045</Qx><Qy>-0.002485595</Qy><Qz>-0.1219216</Qz><Qw>0.9923304</Qw></angles><positions><x>-0.5635866</x><y>-0.08897276</y><z>2.971036</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>0.000657403</Qx><Qy>0.02310698</Qy><Qz>-0.3197369</Qz><Qw>0.9472243</Qw></angles><positions><x>-0.5118737</x><y>0.2202385</y><z>3.076004</z></positions></ElbowLeft>
 </skeleton>
 
 <skeleton>
 <frame>9</frame>
 <HandRight><angles><Qx>0.1096762</Qx><Qy>-0.01625168</Qy><Qz>-0.1456746</Qz><Qw>0.9831002</Qw></angles><positions><x>-0.02075376</x><y>0.5788599</y><z>2.830154</z></positions></HandRight>
 <ElbowRight><angles><Qx>0.09699212</Qx><Qy>0.1510614</Qy><Qz>0.1404446</Qz><Qw>0.9736778</Qw></angles><positions><x>0.05440945</x><y>0.3046568</y><z>3.024801</z></positions></ElbowRight>
-<HandLeft><angles><Qx>0.04674033</Qx><Qy>-0.005869666</Qy><Qz>-0.1244634</Qz><Qw>0.9911053</Qw></angles><positions><x>-0.5620883</x><y>-0.08941973</y><z>2.964334</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>-0.002552118</Qx><Qy>0.0226295</Qy><Qz>-0.3178381</Qz><Qw>0.9478715</Qw></angles><positions><x>-0.5117214</x><y>0.220276</y><z>3.07581</z></positions></ElbowLeft>
 </skeleton>
 
 <skeleton>
 <frame>10</frame>
 <HandRight><angles><Qx>0.09118898</Qx><Qy>-0.007329618</Qy><Qz>-0.07978424</Qz><Qw>0.9926053</Qw></angles><positions><x>-0.01979377</x><y>0.5791711</y><z>2.830798</z></positions></HandRight>
 <ElbowRight><angles><Qx>0.09531585</Qx><Qy>0.1959468</Qy><Qz>0.1520886</Qz><Qw>0.9640481</Qw></angles><positions><x>0.05210274</x><y>0.303846</y><z>3.021456</z></positions></ElbowRight>
-<HandLeft><angles><Qx>0.05252323</Qx><Qy>-0.005817549</Qy><Qz>-0.1099345</Qz><Qw>0.9925331</Qw></angles><positions><x>-0.5571593</x><y>-0.09176219</y><z>2.957202</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>0.03030428</Qx><Qy>0.1274324</Qy><Qz>-0.3132788</Qz><Qw>0.9405844</Qw></angles><positions><x>-0.5118166</x><y>0.2201346</y><z>3.075434</z></positions></ElbowLeft>
 </skeleton>
 
 <skeleton>
 <frame>11</frame>
 <HandRight><angles><Qx>0.1078814</Qx><Qy>-0.008650443</Qy><Qz>-0.07945897</Qz><Qw>0.9909455</Qw></angles><positions><x>2.374081E-05</x><y>0.5860016</y><z>2.831494</z></positions></HandRight>
 <ElbowRight><angles><Qx>0.09610824</Qx><Qy>0.2154856</Qy><Qz>0.1662459</Qz><Qw>0.95744</Qw></angles><positions><x>0.0542683</x><y>0.3032115</y><z>3.022054</z></positions></ElbowRight>
-<HandLeft><angles><Qx>0.04851262</Qx><Qy>-0.005572915</Qy><Qz>-0.1139888</Qz><Qw>0.9922813</Qw></angles><positions><x>-0.5558369</x><y>-0.09197751</y><z>2.954325</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>0.02727785</Qx><Qy>0.1250844</Qy><Qz>-0.311028</Qz><Qw>0.9417386</Qw></angles><positions><x>-0.5117319</x><y>0.2199008</y><z>3.07504</z></positions></ElbowLeft>
 </skeleton>
 
 <skeleton>
 <frame>12</frame>
 <HandRight><angles><Qx>0.1690046</Qx><Qy>-0.03101078</Qy><Qz>-0.1777934</Qz><Qw>0.9689506</Qw></angles><positions><x>0.06510422</x><y>0.5826792</y><z>2.856522</z></positions></HandRight>
 <ElbowRight><angles><Qx>0.059084</Qx><Qy>0.284379</Qy><Qz>0.1625014</Qz><Qw>0.9429904</Qw></angles><positions><x>0.05811368</x><y>0.3009699</y><z>3.035969</z></positions></ElbowRight>
-<HandLeft><angles><Qx>0.01964743</Qx><Qy>-0.002398707</Qy><Qz>-0.1211629</Qz><Qw>0.9924353</Qw></angles><positions><x>-0.5531968</x><y>-0.09151317</y><z>2.950035</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>0.02991214</Qx><Qy>0.1249291</Qy><Qz>-0.3118702</Qz><Qw>0.9414005</Qw></angles><positions><x>-0.5115488</x><y>0.2192679</y><z>3.074028</z></positions></ElbowLeft>
 </skeleton>
 
 <skeleton>
 <frame>13</frame>
 <HandRight><angles><Qx>0.1108442</Qx><Qy>-0.0226893</Qy><Qz>-0.1992498</Qz><Qw>0.9733952</Qw></angles><positions><x>0.1035621</x><y>0.583291</y><z>2.850265</z></positions></HandRight>
 <ElbowRight><angles><Qx>0.05263867</Qx><Qy>0.3093202</Qy><Qz>0.1631143</Qz><Qw>0.9353845</Qw></angles><positions><x>0.06185011</x><y>0.300595</y><z>3.03739</z></positions></ElbowRight>
-<HandLeft><angles><Qx>0.02393067</Qx><Qy>-0.002937575</Qy><Qz>-0.1218042</Qz><Qw>0.9922614</Qw></angles><positions><x>-0.5523936</x><y>-0.08702204</y><z>2.946497</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>0.02670117</Qx><Qy>0.1196937</Qy><Qz>-0.3105129</Qz><Qw>0.9426252</Qw></angles><positions><x>-0.511309</x><y>0.2194621</y><z>3.073935</z></positions></ElbowLeft>
 </skeleton>
 
 <skeleton>
 <frame>14</frame>
 <HandRight><angles><Qx>0.1271937</Qx><Qy>-0.01396379</Qy><Qz>-0.1082311</Qz><Qw>0.9858564</Qw></angles><positions><x>0.1719534</x><y>0.5689992</y><z>2.849834</z></positions></HandRight>
 <ElbowRight><angles><Qx>0.05744307</Qx><Qy>0.3853812</Qy><Qz>0.1474993</Qz><Qw>0.9090796</Qw></angles><positions><x>0.06831313</x><y>0.310713</y><z>3.034632</z></positions></ElbowRight>
-<HandLeft><angles><Qx>0.0009493281</Qx><Qy>-0.0001311882</Qy><Qz>-0.1368977</Qz><Qw>0.9905847</Qw></angles><positions><x>-0.5507787</x><y>-0.08565892</y><z>2.942929</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>0.02516073</Qx><Qy>0.1150094</Qy><Qz>-0.3089762</Qz><Qw>0.943755</Qw></angles><positions><x>-0.5113918</x><y>0.2194125</y><z>3.073638</z></positions></ElbowLeft>
 </skeleton>
 
 <skeleton>
 <frame>15</frame>
 <HandRight><angles><Qx>0.0235605</Qx><Qy>-0.005241383</Qy><Qz>-0.2170937</Qz><Qw>0.9758523</Qw></angles><positions><x>0.2317951</x><y>0.554145</y><z>2.866394</z></positions></HandRight>
 <ElbowRight><angles><Qx>0.02939091</Qx><Qy>0.4100239</Qy><Qz>0.1439122</Qz><Qw>0.9001699</Qw></angles><positions><x>0.07282592</x><y>0.3021353</y><z>3.042714</z></positions></ElbowRight>
-<HandLeft><angles><Qx>-0.006097727</Qx><Qy>0.0008611322</Qy><Qz>-0.1398289</Qz><Qw>0.9901565</Qw></angles><positions><x>-0.5499144</x><y>-0.08591707</y><z>2.94054</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>0.0261221</Qx><Qy>0.1145641</Qy><Qz>-0.3092979</Qz><Qw>0.9436776</Qw></angles><positions><x>-0.5111642</x><y>0.2198185</y><z>3.072953</z></positions></ElbowLeft>
 </skeleton>
 
 <skeleton>
 <frame>16</frame>
 <HandRight><angles><Qx>0.1456141</Qx><Qy>-0.02083714</Qy><Qz>-0.1401146</Qz><Qw>0.9791477</Qw></angles><positions><x>0.2555859</x><y>0.5346323</y><z>2.87031</z></positions></HandRight>
 <ElbowRight><angles><Qx>-0.0001598731</Qx><Qy>0.4182847</Qy><Qz>0.1301001</Qz><Qw>0.8989504</Qw></angles><positions><x>0.08044797</x><y>0.2932824</y><z>3.054974</z></positions></ElbowRight>
-<HandLeft><angles><Qx>-0.01699677</Qx><Qy>0.002535701</Qy><Qz>-0.1475335</Qz><Qw>0.9889078</Qw></angles><positions><x>-0.5501011</x><y>-0.0863991</y><z>2.939492</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>0.02627367</Qx><Qy>0.106163</Qy><Qz>-0.312831</Qz><Qw>0.9434913</Qw></angles><positions><x>-0.5109323</x><y>0.2196006</y><z>3.072474</z></positions></ElbowLeft>
 </skeleton>
 
 <skeleton>
 <frame>17</frame>
 <HandRight><angles><Qx>0.09621605</Qx><Qy>-0.01555928</Qy><Qz>-0.1588778</Qz><Qw>0.9824755</Qw></angles><positions><x>0.2749245</x><y>0.5152311</y><z>2.88112</z></positions></HandRight>
 <ElbowRight><angles><Qx>-0.01068852</Qx><Qy>0.4417538</Qy><Qz>0.1214181</Qz><Qw>0.8888178</Qw></angles><positions><x>0.08147626</x><y>0.2911496</y><z>3.057621</z></positions></ElbowRight>
-<HandLeft><angles><Qx>-0.014851</Qx><Qy>0.002059501</Qy><Qz>-0.137348</Qz><Qw>0.9904094</Qw></angles><positions><x>-0.5516558</x><y>-0.08890142</y><z>2.937159</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>0.02729753</Qx><Qy>0.1053658</Qy><Qz>-0.3131757</Qz><Qw>0.9434372</Qw></angles><positions><x>-0.5109788</x><y>0.2195559</y><z>3.072421</z></positions></ElbowLeft>
 </skeleton>
 
 <skeleton>
 <frame>18</frame>
 <HandRight><angles><Qx>0.06193025</Qx><Qy>-0.01161596</Qy><Qz>-0.1839841</Qz><Qw>0.9809076</Qw></angles><positions><x>0.2859011</x><y>0.5103739</y><z>2.883907</z></positions></HandRight>
 <ElbowRight><angles><Qx>-0.01370844</Qx><Qy>0.4400448</Qy><Qz>0.112709</Qz><Qw>0.890769</Qw></angles><positions><x>0.08222542</x><y>0.2907056</y><z>3.058203</z></positions></ElbowRight>
-<HandLeft><angles><Qx>-0.01629742</Qx><Qy>0.002226409</Qy><Qz>-0.135335</Qz><Qw>0.9906633</Qw></angles><positions><x>-0.5519946</x><y>-0.08887777</y><z>2.937224</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>0.0286743</Qx><Qy>0.1069145</Qy><Qz>-0.3136124</Qz><Qw>0.943077</Qw></angles><positions><x>-0.5112683</x><y>0.2196807</y><z>3.072408</z></positions></ElbowLeft>
 </skeleton>
 
 <skeleton>
 <frame>19</frame>
 <HandRight><angles><Qx>0.06009778</Qx><Qy>-0.01194685</Qy><Qz>-0.1946086</Qz><Qw>0.9789653</Qw></angles><positions><x>0.2822071</x><y>0.5109981</y><z>2.883724</z></positions></HandRight>
 <ElbowRight><angles><Qx>-0.02055039</Qx><Qy>0.4414863</Qy><Qz>0.1073289</Qz><Qw>0.8905886</Qw></angles><positions><x>0.08232785</x><y>0.289866</y><z>3.058953</z></positions></ElbowRight>
-<HandLeft><angles><Qx>-0.01882085</Qx><Qy>0.002444227</Qy><Qz>-0.1287625</Qz><Qw>0.9914938</Qw></angles><positions><x>-0.5543628</x><y>-0.08772235</y><z>2.938271</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>0.02545159</Qx><Qy>0.1001888</Qy><Qz>-0.3147488</Qz><Qw>0.9435294</Qw></angles><positions><x>-0.5114633</x><y>0.2198799</y><z>3.073296</z></positions></ElbowLeft>
 </skeleton>
 
 <skeleton>
 <frame>20</frame>
 <HandRight><angles><Qx>0.07209121</Qx><Qy>-0.01152998</Qy><Qz>-0.1575075</Qz><Qw>0.9848154</Qw></angles><positions><x>0.2672417</x><y>0.5149543</y><z>2.877311</z></positions></HandRight>
 <ElbowRight><angles><Qx>-0.02277075</Qx><Qy>0.4295651</Qy><Qz>0.1098618</Qz><Qw>0.8960389</Qw></angles><positions><x>0.08081822</x><y>0.2890137</y><z>3.060014</z></positions></ElbowRight>
-<HandLeft><angles><Qx>0.0002985884</Qx><Qy>-3.615557E-05</Qy><Qz>-0.1202594</Qz><Qw>0.9927424</Qw></angles><positions><x>-0.5556866</x><y>-0.08902937</y><z>2.940923</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>0.02633291</Qx><Qy>0.1099773</Qy><Qz>-0.3123406</Qz><Qw>0.9432152</Qw></angles><positions><x>-0.5124131</x><y>0.2213256</y><z>3.074588</z></positions></ElbowLeft>
 </skeleton>
 
 <skeleton>
 <frame>21</frame>
 <HandRight><angles><Qx>-0.08245153</Qx><Qy>0.02238082</Qy><Qz>-0.261005</Qz><Qw>0.9615494</Qw></angles><positions><x>0.237028</x><y>0.5380238</y><z>2.862902</z></positions></HandRight>
 <ElbowRight><angles><Qx>-0.01686266</Qx><Qy>0.3969217</Qy><Qz>0.120077</Qz><Qw>0.9098079</Qw></angles><positions><x>0.07359806</x><y>0.2909455</y><z>3.05746</z></positions></ElbowRight>
-<HandLeft><angles><Qx>0.03931506</Qx><Qy>-0.00451962</Qy><Qz>-0.1141178</Qz><Qw>0.9926788</Qw></angles><positions><x>-0.5569218</x><y>-0.08776751</y><z>2.943828</z></positions></HandLeft>
-<ElbowLeft><angles><Qx>0.02389996</Qx><Qy>0.1116882</Qy><Qz>-0.3120326</Qz><Qw>0.943181</Qw></angles><positions><x>-0.512921</x><y>0.2212732</y><z>3.076189</z></positions></ElbowLeft>
 </skeleton>
 
 </action>
