@@ -5,7 +5,6 @@ using System.Text;
 using System.Numerics;
 using Utility;
 using Microsoft.Kinect;
-using Microsoft.DirectX;
 
 namespace Core
 {
@@ -39,13 +38,13 @@ namespace Core
 
 			for (int i = 1; i < record.Frames.Count; i++)
 			{
-				for (int j = 1; j < window.Frames.Count; j++)
+				for (int j = 1; j < windowPresentedByImportedSkeletons.Count; j++)
 				{
 					int currentCellOnMiddleDiagonal = (int)((j * windowPresentedByImportedSkeletons.Count) / record.Frames.Count);
 
 					if (toUseSakoeChibaBand)
 					{
-						if (j < currentCellOnMiddleDiagonal + bandWidth && j > currentCellOnMiddleDiagonal + bandWidth) // Checking if the current cell is in the range
+						if (j > currentCellOnMiddleDiagonal - bandWidth && j < currentCellOnMiddleDiagonal + bandWidth) // Checking if the current cell is in the range
 						{
 							if (dtwType == DynamicTimeWarpingCalculationType.Standart)
 							{
@@ -54,10 +53,12 @@ namespace Core
 							}
 							else if (dtwType == DynamicTimeWarpingCalculationType.Derivative)
 							{
-								//similarity = SkeletonComparer.CompareDerivativesWithSMIJ(record.Frames[i], windowPresentedByImportedSkeletons[j], record.MostInformativeJoints);
-								ImportedSkeleton mainSkeletonDerivatives = CalculateSkeletonDerivative(record.Frames, i);
-								ImportedSkeleton secondarySkeletonDerivatives = CalculateSkeletonDerivative(windowPresentedByImportedSkeletons, i);
-								similarity = SkeletonComparer.CompareWithSMIJ(mainSkeletonDerivatives, secondarySkeletonDerivatives, record.MostInformativeJoints);
+								if (i != record.Frames.Count)
+								{
+									ImportedSkeleton mainSkeletonDerivatives = CalculateSkeletonDerivative(record.Frames, i, record.MostInformativeJoints);
+									ImportedSkeleton secondarySkeletonDerivatives = CalculateSkeletonDerivative(windowPresentedByImportedSkeletons, i, record.MostInformativeJoints);
+									similarity = SkeletonComparer.CompareWithSMIJ(mainSkeletonDerivatives, secondarySkeletonDerivatives, record.MostInformativeJoints);
+								}
 							}
 						}
 					}
@@ -65,7 +66,12 @@ namespace Core
 					{
 						if (dtwType == DynamicTimeWarpingCalculationType.Derivative)
 						{
-
+							if (i != record.Frames.Count)
+							{
+								ImportedSkeleton mainSkeletonDerivatives = CalculateSkeletonDerivative(record.Frames, i, record.MostInformativeJoints);
+								ImportedSkeleton secondarySkeletonDerivatives = CalculateSkeletonDerivative(windowPresentedByImportedSkeletons, i, record.MostInformativeJoints);
+								similarity = SkeletonComparer.CompareWithSMIJ(mainSkeletonDerivatives, secondarySkeletonDerivatives, record.MostInformativeJoints);
+							}
 						}
 						else if (dtwType == DynamicTimeWarpingCalculationType.Standart)
 						{
@@ -79,64 +85,36 @@ namespace Core
 			return DTW[record.Frames.Count - 1, window.Frames.Count - 1] / record.MostInformativeJoints.Count;
 		}
 
-		static ImportedSkeleton CalculateSkeletonDerivative(List<ImportedSkeleton> query, int index)
+		private static ImportedSkeleton CalculateSkeletonDerivative(List<ImportedSkeleton> query, int index, List<JointType> mostInformativeJoints)
 		{
 			var skeletonToReturn = new ImportedSkeleton();
-
-			int skelID = 0;
-			foreach (var skel in query)
+			if (index < query.Count - 1)
 			{
-				if (skelID == 0)
+				foreach (var jointType in mostInformativeJoints)
 				{
-					continue;
+
+					var currentMinusPrev = new JointRotation(
+						query[index].HiararchicalQuaternions[jointType].X - query[index - 1].HiararchicalQuaternions[jointType].X,
+						query[index].HiararchicalQuaternions[jointType].Y - query[index - 1].HiararchicalQuaternions[jointType].Y,
+						query[index].HiararchicalQuaternions[jointType].Z - query[index - 1].HiararchicalQuaternions[jointType].Z,
+						query[index].HiararchicalQuaternions[jointType].W - query[index - 1].HiararchicalQuaternions[jointType].W);
+
+					var nextMinusPrevDividedByTwo = new JointRotation(
+						(query[index + 1].HiararchicalQuaternions[jointType].X - query[index - 1].HiararchicalQuaternions[jointType].X) / 2,
+						(query[index + 1].HiararchicalQuaternions[jointType].Y - query[index - 1].HiararchicalQuaternions[jointType].Y) / 2,
+						(query[index + 1].HiararchicalQuaternions[jointType].Z - query[index - 1].HiararchicalQuaternions[jointType].Z) / 2,
+						(query[index + 1].HiararchicalQuaternions[jointType].W - query[index - 1].HiararchicalQuaternions[jointType].W) / 2);
+
+					var calculatedDerivative = new JointRotation(
+						(currentMinusPrev.X + nextMinusPrevDividedByTwo.X) / 2,
+						(currentMinusPrev.Y + nextMinusPrevDividedByTwo.Y) / 2,
+						(currentMinusPrev.Z + nextMinusPrevDividedByTwo.Z) / 2,
+						(currentMinusPrev.W + nextMinusPrevDividedByTwo.W) / 2
+						);
+
+					skeletonToReturn.HiararchicalQuaternions[jointType] = calculatedDerivative;
+
 				}
-
-				if (skelID == query.Count)
-				{
-					break;
-				}
-
-				foreach (var jointName in Enum.GetNames(typeof(JointType)))
-				{
-					var jointType = (JointType)(Enum.Parse(typeof(JointType), jointName));
-
-					Quaternion currentQuaternion = new Quaternion(
-						skel.HiararchicalQuaternions[jointType].X,
-						skel.HiararchicalQuaternions[jointType].Y,
-						skel.HiararchicalQuaternions[jointType].Z,
-						skel.HiararchicalQuaternions[jointType].W);
-
-					Quaternion previousQuaternion = new Quaternion(
-						query[skelID - 1].HiararchicalQuaternions[jointType].X,
-						query[skelID - 1].HiararchicalQuaternions[jointType].Y,
-						query[skelID - 1].HiararchicalQuaternions[jointType].Z,
-						query[skelID - 1].HiararchicalQuaternions[jointType].W);
-
-					Quaternion nextQuaternion = new Quaternion(
-						query[skelID + 1].HiararchicalQuaternions[jointType].X,
-						query[skelID + 1].HiararchicalQuaternions[jointType].Y,
-						query[skelID + 1].HiararchicalQuaternions[jointType].Z,
-						query[skelID + 1].HiararchicalQuaternions[jointType].W);
-
-					Quaternion previousMinusNextQuaternionDividedByTwo = Quaternion.Subtract(previousQuaternion, nextQuaternion);
-					previousQuaternion.X /= 2;
-					previousQuaternion.Y /= 2;
-					previousQuaternion.Z /= 2;
-					previousQuaternion.W /= 2;
-
-					Quaternion calculatedQuaternionDerivative = Quaternion.Subtract(currentQuaternion, previousQuaternion) + previousMinusNextQuaternionDividedByTwo;
-					calculatedQuaternionDerivative.X /= 2;
-					calculatedQuaternionDerivative.Y /= 2;
-					calculatedQuaternionDerivative.Z /= 2;
-					calculatedQuaternionDerivative.W /= 2;
-
-					skeletonToReturn.HiararchicalQuaternions[jointType].X = calculatedQuaternionDerivative.X;
-					skeletonToReturn.HiararchicalQuaternions[jointType].Y = calculatedQuaternionDerivative.Y;
-					skeletonToReturn.HiararchicalQuaternions[jointType].Y = calculatedQuaternionDerivative.Y;
-					skeletonToReturn.HiararchicalQuaternions[jointType].Z = calculatedQuaternionDerivative.Z;
-					}
-
-				skelID++;
 			}
 			return skeletonToReturn;
 		}

@@ -1,5 +1,5 @@
 E:\Projects\KinectHumanActionRecognition\recordings\squatFiltered.xml
-E:\Projects\KinectHumanActionRecognition\recordings\wavingLeftHand.xml
+E:\Projects\KinectHumanActionRecognition\recordings\wavingLeftHandFiltered.xml
 E:\Projects\KinectHumanActionRecognition\recordings\wavingRightHandFiltered.xml
 E:\Projects\KinectHumanActionRecognition\recordings\swipeRightHandSecondTry.xml
 E:\Projects\KinectHumanActionRecognition\recordings\swipeLeftHand.xml
