@@ -14,7 +14,7 @@ namespace Core
 		private const int SKELETON_COUNT = 6;
 		private const double ACCEPTABLE_SKELETON_SIMILARITY = 0.1;
 		private const int ACCEPTABLE_WINDOW_SIZE = 40;
-		private const double ACCEPTABLE_ACTION_SIMILARITY = 4000;
+		private const double ACCEPTABLE_ACTION_SIMILARITY = 1400;
 
 		private KinectSensor kinectSensor;
 
@@ -105,9 +105,9 @@ namespace Core
 							double overallResult = 0.0;
 							foreach (var activityRecord in activity.Recordings)
 							{
-								//var activityRecordResult = DTW(activityRecord, window);
+								var activityRecordResult = DTW(activityRecord, window, DynamicTimeWarpingCalculationType.Derivative, DynamicTimeWarpingPathTypes.AlwaysDiagonally, true);
 								
-								var activityRecordResult = ElasticMatchingWithFreedomDegree.CompareActivities(activityRecord, window);
+								//var activityRecordResult = ElasticMatchingWithFreedomDegree.CompareActivities(activityRecord, window);
 								overallResult += activityRecordResult;
 							}
 
@@ -174,9 +174,9 @@ namespace Core
 			}
 		}
 
-		public double DTW(ActivityRecord record, ActivityWindow window)
+		public double DTW(ActivityRecord record, ActivityWindow window, DynamicTimeWarpingCalculationType calcType = DynamicTimeWarpingCalculationType.Standart, DynamicTimeWarpingPathTypes stepPattern = DynamicTimeWarpingPathTypes.Standart, bool toUseSakoeChiba = true, double bandWidth = 0.1)
 		{
-			return (double)DynamicTimeWarping.CompareActivities(record, window, DynamicTimeWarpingCalculationType.Standart, DynamicTimeWarpingPathTypes.Standart, true, 0.1);
+			return (double)DynamicTimeWarping.CompareActivities(record, window, calcType, stepPattern, toUseSakoeChiba, bandWidth);
 		}
 	}
 }

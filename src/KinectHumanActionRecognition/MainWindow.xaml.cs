@@ -618,7 +618,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
 
 			List<Activity> tempActivities = new List<Activity>();
 
-
+			
 			using (var streamReader = new StreamReader(openFile.FileName))
 			{
 				string line = "";
