@@ -65,7 +65,7 @@ namespace Utility
 			{
 				var jointWeight = (mostInformativeJoints.Count - jointID) == 0 ? 1 : (mostInformativeJoints.Count - jointID);
 
-				var similarity = CompareQuaternions(mainSkeleton.HiararchicalQuaternions[joint], 
+				var similarity = CompareQuaternions(mainSkeleton.HiararchicalQuaternions[joint],
 						secondarySkeleton.BoneOrientations[joint].HierarchicalRotation.Quaternion);
 
 				overall += (similarity * 1000);// * jointWeight;
@@ -105,7 +105,7 @@ namespace Utility
 			double distanceZ = mainQuaternion.Z - secondaryQuaternion.Z;
 			double distanceW = mainQuaternion.W - secondaryQuaternion.W;
 
-			double similarity = 
+			double similarity =
 				distanceX * distanceX +
 				distanceY * distanceY +
 				distanceZ * distanceZ +
@@ -125,7 +125,7 @@ namespace Utility
 		{
 			JointRotation newMainQuaternion = new JointRotation(mainQuaternion.X, mainQuaternion.Y, mainQuaternion.Z, mainQuaternion.W);
 			JointRotation newSecondaryQuaternion = new JointRotation(secondaryQuaternion.X, secondaryQuaternion.Y, secondaryQuaternion.Z, secondaryQuaternion.W);
-			
+
 
 			return CompareQuaternions(newMainQuaternion, newSecondaryQuaternion);
 		}
