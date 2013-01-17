@@ -176,7 +176,7 @@ namespace Core
 
 		public double DTW(ActivityRecord record, ActivityWindow window)
 		{
-			return (double)DynamicTimeWarping.CompareActivities(record, window);
+			return (double)DynamicTimeWarping.CompareActivities(record, window, DynamicTimeWarpingCalculationType.Standart, DynamicTimeWarpingPathTypes.Standart, true, 0.1);
 		}
 	}
 }
