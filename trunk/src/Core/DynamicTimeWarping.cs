@@ -10,6 +10,8 @@ namespace Core
 {
 	public static class DynamicTimeWarping
 	{
+		static List<ActivityRecord> recordDerivatives = new List<ActivityRecord>();
+
 		public static double CompareActivities(ActivityRecord record, ActivityWindow window, DynamicTimeWarpingCalculationType dtwType, DynamicTimeWarpingPathTypes pathType = DynamicTimeWarpingPathTypes.Standart, bool toUseSakoeChibaBand = false, double bandWidthInProcentage = 0.1)
 		{
 			double similarity = 0.0f;
@@ -40,10 +42,9 @@ namespace Core
 			{
 				for (int j = 1; j < windowPresentedByImportedSkeletons.Count; j++)
 				{
-					int currentCellOnMiddleDiagonal = (int)((j * windowPresentedByImportedSkeletons.Count) / record.Frames.Count);
-
 					if (toUseSakoeChibaBand)
 					{
+						int currentCellOnMiddleDiagonal = (int)((j * windowPresentedByImportedSkeletons.Count) / record.Frames.Count);
 						if (j > currentCellOnMiddleDiagonal - bandWidth && j < currentCellOnMiddleDiagonal + bandWidth) // Checking if the current cell is in the range
 						{
 							if (dtwType == DynamicTimeWarpingCalculationType.Standart)
@@ -133,6 +134,8 @@ namespace Core
 			}
 			else if (pathType == DynamicTimeWarpingPathTypes.AlwaysDiagonally)
 			{
+
+
 				if (i == 1 || j == 1)
 				{
 					DTW[i, j] = similarity +

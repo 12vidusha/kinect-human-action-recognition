@@ -13,8 +13,7 @@ namespace Core
 	{
 		private const int SKELETON_COUNT = 6;
 		private const double ACCEPTABLE_SKELETON_SIMILARITY = 0.1;
-		private const int ACCEPTABLE_WINDOW_SIZE = 40;
-		private const double ACCEPTABLE_ACTION_SIMILARITY = 1400;
+		private const int ACCEPTABLE_WINDOW_SIZE = 50;
 
 		private KinectSensor kinectSensor;
 
@@ -87,11 +86,6 @@ namespace Core
 
 					if (window.Size >= ACCEPTABLE_WINDOW_SIZE)
 					{
-						foreach (var item in window.Frames.ToArray())
-						{
-							//Console.WriteLine(item.BoneOrientations[JointType.KneeLeft].HierarchicalRotation.Quaternion.X);
-						}
-
 						CurrentMode = Mode.AlgorithmRunning;
 					}
 				}
@@ -105,22 +99,41 @@ namespace Core
 							double overallResult = 0.0;
 							foreach (var activityRecord in activity.Recordings)
 							{
-								var activityRecordResult = DTW(activityRecord, window, DynamicTimeWarpingCalculationType.Derivative, DynamicTimeWarpingPathTypes.AlwaysDiagonally, true);
-								
-								//var activityRecordResult = ElasticMatchingWithFreedomDegree.CompareActivities(activityRecord, window);
+								var activityRecordResult = 0.0;
+								if (AlgorithmType == AlgorithmTypes.DTW)
+								{
+									activityRecordResult = DTW(activityRecord, window, DynamicTimeWarpingCalculationType.Standart, StepPattern, true);
+								}
+
+								else if (AlgorithmType == AlgorithmTypes.DLM)
+								{
+									activityRecordResult = ElasticMatchingWithFreedomDegree.CompareActivities(activityRecord, window);
+								}
+
 								overallResult += activityRecordResult;
 							}
 
 							overallResult /= activity.Recordings.Count;
 
-							if (overallResult <= ACCEPTABLE_ACTION_SIMILARITY && !activityRecognizingStartedTriggered)
+							var currentAlgorithmAcceptableActionSimilarity = 0;
+
+							if (AlgorithmType == AlgorithmTypes.DTW)
+							{
+								currentAlgorithmAcceptableActionSimilarity = AcceptableActionSimilarity.DTW;
+							}
+
+							else if(AlgorithmType == AlgorithmTypes.DLM){
+								currentAlgorithmAcceptableActionSimilarity = AcceptableActionSimilarity.DLM;
+							}
+
+							if (overallResult <= currentAlgorithmAcceptableActionSimilarity && !activityRecognizingStartedTriggered)
 							{
 								activityRecognizingStartedTriggered = true;
 								activityRecognizingEndedTriggered = false;
 								ActivityRecognizingStarted.Invoke(this, new ActivityRecognizingEventArgs(activity, overallResult));
 								recognizedActivityName = activity.Name;
 							}
-							else if (overallResult > ACCEPTABLE_ACTION_SIMILARITY && !activityRecognizingEndedTriggered && recognizedActivityName == activity.Name)
+							else if (overallResult > currentAlgorithmAcceptableActionSimilarity && !activityRecognizingEndedTriggered && recognizedActivityName == activity.Name)
 							{
 								activityRecognizingEndedTriggered = true;
 								activityRecognizingStartedTriggered = false;
@@ -178,5 +191,11 @@ namespace Core
 		{
 			return (double)DynamicTimeWarping.CompareActivities(record, window, calcType, stepPattern, toUseSakoeChiba, bandWidth);
 		}
+
+		public DynamicTimeWarpingPathTypes StepPattern { get; set; }
+
+		public AlgorithmTypes AlgorithmType { get; set; }
+
+		public bool? ToUseSakoeChiba { get; set; }
 	}
 }
