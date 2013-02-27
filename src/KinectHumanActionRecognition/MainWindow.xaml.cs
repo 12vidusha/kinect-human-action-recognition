@@ -23,6 +23,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
 	using System.Globalization;
 	using Core;
 	using System.Threading;
+	using System.Windows.Controls;
 
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
@@ -120,6 +121,14 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
 
 		#endregion
 
+		#endregion
+
+		#region Constants
+		const string DTWStringConst = "DTW";
+		const string DLMStringConst = "DLM";
+
+		const string StepPatternStandartStringConst = "Standart";
+		const string StepPatternDiagonallyStringConst = "Diagonally";
 		#endregion
 
 		#region Functions
@@ -597,15 +606,27 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
 
 		private void buttonStartRecognizing_Click(object sender, RoutedEventArgs e)
 		{
-			if (mFirstAction != null)
-			{
-				var firstActivity = new Activity("first");
-				firstActivity.Recordings.Add(new ActivityRecord(mFirstAction));
+			recognitionCore.LoadTrainedData(Activities);
 
-				Activities.Add(firstActivity);
+			if (comboBoxStepPattern.Text == StepPatternDiagonallyStringConst)
+			{
+				recognitionCore.StepPattern = DynamicTimeWarpingPathTypes.AlwaysDiagonally;
+			}
+			else
+			{
+				recognitionCore.StepPattern = DynamicTimeWarpingPathTypes.Standart;
 			}
 
-			recognitionCore.LoadTrainedData(Activities);
+			if (comboBoxAlgorithms.Text == DTWStringConst)
+			{
+				recognitionCore.AlgorithmType = AlgorithmTypes.DTW;
+			}
+			else
+			{
+				recognitionCore.AlgorithmType = AlgorithmTypes.DLM;
+			}
+			recognitionCore.ToUseSakoeChiba = checkBoxToUseSakoeChiba.IsChecked;
+
 
 			recognitionCore.CurrentMode = Mode.FillingWindow;
 		}
@@ -640,6 +661,21 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
 					Activities = tempActivities;
 
 				}
+			}
+		}
+
+		private void comboBoxAlgorithms_DropDownClosed(object sender, EventArgs e)
+		{
+			var selectedItemString = comboBoxAlgorithms.Text;
+			if (selectedItemString == DTWStringConst)
+			{
+				comboBoxStepPattern.IsEnabled = true;
+				checkBoxToUseSakoeChiba.IsEnabled = true;
+			}
+			else
+			{
+				comboBoxStepPattern.IsEnabled = false;
+				checkBoxToUseSakoeChiba.IsEnabled = false;
 			}
 		}
 	}

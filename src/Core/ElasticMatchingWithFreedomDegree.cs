@@ -16,7 +16,7 @@ namespace Core
 
 			List<ImportedSkeleton> windowPresentedByImportedSkeleton = new List<ImportedSkeleton>();
 
-			foreach (var frame in window.Frames)
+			while(window.Frames.Count != 0)
 			{
 				windowPresentedByImportedSkeleton.Add(window.Frames.Dequeue());
 			}
@@ -26,6 +26,8 @@ namespace Core
 				for (int j = 0; j < windowPresentedByImportedSkeleton.Count; j++)
 				{
 					int index = (j / record.Frames.Count) * windowPresentedByImportedSkeleton.Count;
+					if (index >= windowPresentedByImportedSkeleton.Count)
+						index--;
 					result += SkeletonComparer.CompareWithSMIJ(record.Frames[i], windowPresentedByImportedSkeleton[index], mostInformativeJoints);
 				}
 			}

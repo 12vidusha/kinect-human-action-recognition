@@ -86,11 +86,19 @@
         </GroupBox>
 		<GroupBox Header="Compare actions" Height="100" HorizontalAlignment="Right" Margin="0,8,336,0" Name="groupBoxCompareActions" VerticalAlignment="Top" Width="342" Grid.Row="2" Grid.RowSpan="2">
 			<Grid>
-				<Button Content="Load first action" Height="23" Margin="0,11,6,0" Name="buttonLoadFirstAction" VerticalAlignment="Top" HorizontalAlignment="Right" Width="105" Click="buttonLoadFirstAction_Click"/>
-				<Button Content="Load second action" Height="23" Margin="0,42,6,0" Name="buttonLoadSecondAction" VerticalAlignment="Top" HorizontalAlignment="Right" Width="105" Click="buttonLoadSecondAction_Click" />
-				<Button Content="Start recognizing" Height="23" HorizontalAlignment="Left" Margin="6,42,0,0" Name="buttonStartRecognizing" VerticalAlignment="Top" Width="96"  Click="buttonStartRecognizing_Click" />
-				<Button Content="Load action set" Height="54" HorizontalAlignment="Left" Margin="111,11,0,0" Name="buttonLoadActionSet" VerticalAlignment="Top" Width="102" Click="buttonLoadActionSet_Click"/>
-			</Grid>
+                <Button Content="Start recognizing" Height="23" HorizontalAlignment="Left" Margin="120,42,0,0" Name="buttonStartRecognizing" VerticalAlignment="Top" Width="96"  Click="buttonStartRecognizing_Click" />
+				<Button Content="Load action set" Height="54" HorizontalAlignment="Left" Margin="222,11,0,0" Name="buttonLoadActionSet" VerticalAlignment="Top" Width="102" Click="buttonLoadActionSet_Click"/>
+                <ComboBox HorizontalAlignment="Left" Margin="6,11,0,0" Name="comboBoxAlgorithms" Width="104" Height="23" VerticalAlignment="Top" DropDownClosed="comboBoxAlgorithms_DropDownClosed">
+                    <ComboBoxItem IsSelected="True">DTW</ComboBoxItem>
+                    <ComboBoxItem>DLM</ComboBoxItem>
+                </ComboBox>
+                <ComboBox Height="23" HorizontalAlignment="Right" Margin="0,11,114,0" Name="comboBoxStepPattern" VerticalAlignment="Top" Width="96">
+                    <ComboBoxItem IsSelected="True">Standart</ComboBoxItem>
+                    <ComboBoxItem>AlwaysDiagonally</ComboBoxItem>
+                        
+                </ComboBox>
+                <CheckBox Content="Sakoe-Chiba" Height="16" HorizontalAlignment="Left" Margin="6,45,0,0" Name="checkBoxToUseSakoeChiba" VerticalAlignment="Top" />
+            </Grid>
 		</GroupBox>
 	</Grid>
 </Window>
