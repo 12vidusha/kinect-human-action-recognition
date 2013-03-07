@@ -6,6 +6,8 @@ using Microsoft.Kinect;
 using Utility.Model;
 using System.Collections;
 using Utility;
+using Core.DTW;
+
 
 namespace Core
 {
@@ -61,7 +63,7 @@ namespace Core
 
 			using (DepthImageFrame depth = e.OpenDepthImageFrame())
 			{
-				#region Checks
+				#region Regular checks
 				#region First
 				if (kinectSensor == null)
 				{
