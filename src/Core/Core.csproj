@@ -47,8 +47,8 @@
     <Compile Include="ActivityRecord.cs" />
     <Compile Include="ActivityWindow.cs" />
     <Compile Include="Core.cs" />
-    <Compile Include="DerivativeDynamicTimeWarping.cs" />
-    <Compile Include="DynamicTimeWarping.cs" />
+    <Compile Include="DTW\DerivativeDynamicTimeWarping.cs" />
+    <Compile Include="DTW\DynamicTimeWarping.cs" />
     <Compile Include="ElasticMatchingWithFreedomDegree.cs">
       <SubType>Code</SubType>
     </Compile>
