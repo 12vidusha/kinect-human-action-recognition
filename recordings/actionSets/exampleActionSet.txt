@@ -1,5 +1,5 @@
-C:\Users\Lyubo\Projects\KinectHumanActionRecognition\recordings\squatFiltered.xml
-C:\Users\Lyubo\Projects\KinectHumanActionRecognition\recordings\wavingLeftHandFiltered.xml
-C:\Users\Lyubo\Projects\KinectHumanActionRecognition\recordings\wavingRightHandFiltered.xml
-C:\Users\Lyubo\Projects\KinectHumanActionRecognition\recordings\swipeRightHandSecondTry.xml
-C:\Users\Lyubo\Projects\KinectHumanActionRecognition\recordings\swipeLeftHand.xml
+E:\Projects\KinectHumanActionRecognition\recordings\squatFiltered.xml
+E:\Projects\KinectHumanActionRecognition\recordings\wavingLeftHandFiltered.xml
+E:\Projects\KinectHumanActionRecognition\recordings\wavingRightHandFiltered.xml
+E:\Projects\KinectHumanActionRecognition\recordings\swipeRightHandSecondTry.xml
+E:\Projects\KinectHumanActionRecognition\recordings\swipeLeftHand.xml
